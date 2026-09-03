@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { Mail, ArrowLeft, Send, Lock } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -53,12 +54,16 @@ export function ForgotPasswordForm() {
         </div>
 
         {/* Back to Login Outline Button */}
-        <Button variant="outline" className="w-full h-12 text-base font-semibold border-border text-primary hover:bg-primary/5 hover:text-primary" asChild>
-          <Link href="/login">
-            <Lock className="mr-2 h-5 w-5" />
-            Back to Login
-          </Link>
-        </Button>
+        <Link 
+          href="/login"
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "w-full h-12 text-base font-semibold border-border text-primary hover:bg-primary/5 hover:text-primary flex justify-center"
+          )}
+        >
+          <Lock className="mr-2 h-5 w-5" />
+          Back to Login
+        </Link>
       </form>
     </div>
   );
