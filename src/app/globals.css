@@ -53,7 +53,7 @@
 }
 
 :root {
-  --background: #F8FAFC;
+  --background: #FFFFFF;
   --foreground: #1F2A44;
   --card: #FFFFFF;
   --card-foreground: #1F2A44;
@@ -63,9 +63,9 @@
   --primary-foreground: #FFFFFF;
   --secondary: #64748B;
   --secondary-foreground: #FFFFFF;
-  --muted: #E2E8F0;
+  --muted: #F1F5F9;
   --muted-foreground: #64748B;
-  --accent: #E2E8F0;
+  --accent: #F1F5F9;
   --accent-foreground: #1F2A44;
   --destructive: #DC2626;
   --border: #E2E8F0;
@@ -82,7 +82,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   
   --sidebar: #F8FAFC;
   --sidebar-foreground: #1F2A44;
