@@ -3,15 +3,20 @@
 import { useState } from "react";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
+import { cn } from "@/lib/utils";
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen w-full bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <div className="flex h-screen w-full bg-slate-50 dark:bg-slate-950 overflow-hidden relative">
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block h-full">
-        <Sidebar />
+      <div className={cn("hidden lg:block h-full transition-all duration-300", isDesktopCollapsed ? "w-20" : "w-64")}>
+        <Sidebar 
+          isCollapsed={isDesktopCollapsed} 
+          onToggleCollapse={() => setIsDesktopCollapsed(!isDesktopCollapsed)} 
+        />
       </div>
 
       {/* Mobile Sidebar Overlay */}
