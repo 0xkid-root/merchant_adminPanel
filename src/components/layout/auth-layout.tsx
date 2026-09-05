@@ -1,25 +1,43 @@
 import React from "react";
 import Image from "next/image";
 
-export function AuthLayout({ children }: { children: React.ReactNode }) {
+export function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <main className="min-h-screen bg-[#F6F4FF] p-0 sm:p-5 flex flex-col">
-      <div className="flex-1 w-full overflow-hidden bg-white sm:rounded-[22px] shadow-sm border border-slate-100">
-        <div className="grid h-full w-full lg:grid-cols-[46%_54%]">
-          <div className="flex h-full w-full flex-col items-center justify-center bg-white px-4 py-6 sm:px-8 lg:px-12">
-            {children}
+    <main className="h-screen overflow-hidden bg-[#F6F4FF] p-0 sm:p-4 lg:p-5">
+
+      <div className="h-full w-full overflow-hidden bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] ring-1 ring-slate-200/50 sm:rounded-[24px]">
+
+        <div className="grid h-full w-full lg:grid-cols-[42%_58%]">
+
+          {/* LEFT - AUTH */}
+          <div className="flex h-full items-center justify-center bg-white px-5 py-8 sm:px-8 lg:px-12 xl:px-16">
+            <div className="w-full max-w-[440px]">
+              {children}
+            </div>
           </div>
 
-          <div className="relative hidden bg-[#F5F3FF] lg:block">
+          {/* RIGHT - VISUAL */}
+          <div className="relative hidden h-full overflow-hidden lg:block bg-[#F8F7FF]">
+            {/* Ambient Background Glows */}
+            <div className="absolute -top-[20%] -right-[10%] h-[70%] w-[70%] rounded-full bg-primary/15 blur-[120px]" />
+            <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-primary/10 blur-[100px]" />
+            
             <Image
               src="/login/login-image.png"
-              alt="Admin Portal Background"
+              alt="AtMoonPe Admin Platform"
               fill
-              className="object-contain object-center"
               priority
+              className="relative z-10 object-cover object-center"
+              sizes="58vw"
             />
           </div>
+
         </div>
+
       </div>
     </main>
   );

@@ -13,68 +13,73 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="w-full max-w-[480px] w-full flex flex-col justify-center">
-      <div className="mb-8 flex items-center gap-3 sm:mb-10 sm:gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center sm:h-14 sm:w-14">
+    <div className="w-full flex flex-col justify-center">
+      {/* Branding Header */}
+      <div className="mb-10 flex items-center gap-3 sm:mb-12 sm:gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 sm:h-14 sm:w-14">
           <Image
             src="/atmoonpe-logo.png"
             alt="AtMoonPe"
             width={80}
             height={80}
             priority
-            className="h-full w-full object-contain"
+            className="h-9 w-9 object-contain sm:h-10 sm:w-10"
           />
         </div>
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
+        <div className="flex flex-col">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             AtMoonPe
           </h1>
-          <p className="text-sm text-slate-600 sm:text-base">
+          <p className="text-sm font-medium text-slate-500">
             Admin Portal
           </p>
         </div>
       </div>
 
+      {/* Title Area */}
       <div className="mb-8">
-        <h2 className="text-[28px] sm:text-[32px] font-bold tracking-tight text-[#1E293B] mb-2 sm:mb-3">Welcome Back!</h2>
-        <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+        <h2 className="mb-2.5 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[34px]">
+          Welcome Back!
+        </h2>
+        <p className="text-base font-medium leading-relaxed text-slate-500">
           Login to access the AtMoonPe administration portal and manage platform operations.
         </p>
       </div>
 
-      <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+      {/* Form */}
+      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
         {/* Email Field */}
-        <div className="space-y-2">
-          <Label htmlFor="email" className="font-semibold text-[#1E293B] text-sm">Email Address</Label>
-          <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-            <Input 
-              id="email" 
-              type="email" 
-              placeholder="admin@atmoonpe.com" 
-              className="pl-11 h-12 rounded-xl border-slate-200 bg-white focus-visible:ring-primary focus-visible:ring-offset-0 text-sm sm:text-base"
+        <div className="space-y-2.5">
+          <Label htmlFor="email" className="text-sm font-semibold text-slate-700">Email Address</Label>
+          <div className="relative group">
+            <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="admin@atmoonpe.com"
+              className="h-[52px] rounded-xl border-slate-200 bg-white/50 pl-12 text-base transition-all placeholder:text-slate-400 hover:bg-white focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:border-primary"
             />
           </div>
         </div>
 
         {/* Password Field */}
-        <div className="space-y-2">
-          <Label htmlFor="password" className="font-semibold text-[#1E293B] text-sm">Password</Label>
-          <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-            <Input 
-              id="password" 
-              type={showPassword ? "text" : "password"} 
-              placeholder="Enter your password" 
-              className="pl-11 pr-11 h-12 rounded-xl border-slate-200 bg-white focus-visible:ring-primary focus-visible:ring-offset-0 text-sm sm:text-base"
+        <div className="space-y-2.5">
+          <Label htmlFor="password" className="text-sm font-semibold text-slate-700">Password</Label>
+          <div className="relative group">
+            <Lock className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary" />
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="h-[52px] rounded-xl border-slate-200 bg-white/50 pl-12 pr-12 text-base transition-all placeholder:text-slate-400 hover:bg-white focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:border-primary"
             />
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors hover:text-slate-700 focus:outline-none"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
+              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -82,29 +87,29 @@ export function LoginForm() {
         {/* Remember me & Forgot Password */}
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center space-x-2.5">
-            <Checkbox id="remember" className="rounded-md border-slate-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
-            <Label htmlFor="remember" className="text-sm font-medium text-[#1E293B] cursor-pointer">
+            <Checkbox id="remember" className="h-5 w-5 rounded-[6px] border-slate-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary" />
+            <Label htmlFor="remember" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">
               Remember me
             </Label>
           </div>
-          <Link 
-            href="/forgot-password" 
-            className="text-sm font-semibold text-primary hover:text-primary/90 hover:underline transition-colors"
+          <Link
+            href="/forgot-password"
+            className="text-sm font-bold text-primary transition-colors hover:text-primary/80"
           >
             Forgot Password?
           </Link>
         </div>
 
         {/* Submit Button */}
-        <Button className="w-full h-12 rounded-xl text-sm sm:text-base font-semibold bg-primary hover:bg-primary/90 transition-colors shadow-sm" type="submit">
-          <Lock className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+        <Button className="h-[52px] w-full rounded-xl bg-primary text-[15px] font-semibold text-white shadow-[0_4px_14px_0_rgba(99,102,241,0.25)] transition-all hover:-translate-y-[1px] hover:bg-primary/95 hover:shadow-[0_6px_20px_rgba(99,102,241,0.3)]" type="submit">
           Login to Admin Dashboard
         </Button>
       </form>
 
-      <div className="mt-8 flex items-start gap-3 text-sm text-slate-500">
-         <ShieldCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-         <p className="leading-snug">Secure admin access to manage your entire payments ecosystem.</p>
+      {/* Security Message */}
+      <div className="mt-8 flex items-center justify-center gap-2 text-sm font-medium text-slate-500 rounded-lg bg-slate-50/80 px-4 py-3 ring-1 ring-slate-100">
+        <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+        <p>Secure admin access for platform operations.</p>
       </div>
     </div>
   );
