@@ -25,7 +25,7 @@ export function AuthLayout({
             {/* Ambient Background Glows */}
             <div className="absolute -top-[20%] -right-[10%] h-[70%] w-[70%] rounded-full bg-primary/15 blur-[120px]" />
             <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-primary/10 blur-[100px]" />
-            
+
             <Image
               src="/login/login-image.png"
               alt="AtMoonPe Admin Platform"
