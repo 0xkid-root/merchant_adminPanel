@@ -22,7 +22,7 @@ export function Sidebar({
     <SidebarContext.Provider value={{ isCollapsed, activeGroup: null }}>
       <div
         className={cn(
-          "relative z-20 flex h-full flex-col bg-transparent transition-all duration-300 ease-in-out px-2",
+          "relative z-20 flex h-full flex-col border-r border-slate-200 bg-white transition-all duration-300 ease-in-out dark:border-slate-800 dark:bg-slate-950",
           isCollapsed ? "w-[72px]" : "w-[248px]",
           className
         )}

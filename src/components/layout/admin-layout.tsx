@@ -10,7 +10,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen w-full bg-[#f4f4f5] dark:bg-slate-950 overflow-hidden relative">
+    <div className="flex h-screen w-full bg-white dark:bg-slate-950 overflow-hidden relative">
       {/* Desktop Sidebar */}
       <div
         className={cn(
@@ -40,10 +40,10 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col min-w-0 overflow-hidden bg-white m-2 lg:m-4 rounded-2xl lg:rounded-[32px] border border-slate-200 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+      <div className="flex flex-1 flex-col min-w-0 overflow-hidden bg-[#f4f4f5] dark:bg-slate-900">
         <Header onMenuClick={() => setIsMobileMenuOpen(true)} />
         <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8">
-          <div className="mx-auto w-full max-w-[1600px]">
+          <div className="mx-auto w-full max-w-7xl">
             {children}
           </div>
         </main>

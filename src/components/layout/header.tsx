@@ -10,6 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 
 interface HeaderProps {
@@ -26,7 +27,7 @@ export function Header({ onMenuClick }: HeaderProps) {
     : "Dashboard";
 
   return (
-    <header className="flex h-[72px] items-center justify-between bg-transparent px-4 md:px-6 xl:px-8">
+    <header className="flex h-[72px] items-center justify-between border-b border-slate-200 bg-[#f8f8f9] px-4 md:px-6 xl:px-8 dark:border-slate-800 dark:bg-slate-950">
       {/* Left: Mobile Menu & Breadcrumb */}
       <div className="flex items-center gap-3">
         <Button
@@ -50,20 +51,20 @@ export function Header({ onMenuClick }: HeaderProps) {
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Global Search */}
         <div className="relative hidden w-64 md:block lg:w-80 xl:w-96">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
           <input
             type="search"
             placeholder="Search anything..."
-            className="h-10 w-full rounded-full border border-slate-200 bg-white pl-10 pr-4 text-[13px] font-medium text-slate-900 transition-all placeholder:text-slate-400 hover:bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 shadow-sm dark:bg-slate-900 dark:text-white dark:border-slate-800 dark:focus:ring-slate-700"
+            className="h-10 w-full rounded-full border-none bg-white pl-10 pr-4 text-[13px] font-medium text-slate-900 transition-all placeholder:text-slate-400 hover:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 shadow-sm dark:bg-slate-900 dark:text-white dark:focus:ring-slate-800"
           />
         </div>
 
         <div className="flex items-center gap-2 ml-1">
-          <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-full border border-slate-200 bg-white shadow-sm text-slate-500 hover:text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white transition-all hover:scale-105">
+          <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-full border-transparent bg-white shadow-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white transition-all hover:scale-105">
             <Bell className="h-4 w-4" />
           </Button>
 
-          <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-full border border-slate-200 bg-white shadow-sm text-slate-500 hover:text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white transition-all hover:scale-105">
+          <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-full border-transparent bg-white shadow-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white transition-all hover:scale-105">
             <MessageSquare className="h-4 w-4" />
           </Button>
 
@@ -81,16 +82,18 @@ export function Header({ onMenuClick }: HeaderProps) {
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 mt-2">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Shield className="mr-2 h-4 w-4" />
-                <span>Security</span>
-              </DropdownMenuItem>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Shield className="mr-2 h-4 w-4" />
+                  <span>Security</span>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950/50">
                 <LogOut className="mr-2 h-4 w-4" />
