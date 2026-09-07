@@ -1,1 +1,1 @@
-export { default as MerchantPage } from './components/merchant-page';
+export { MerchantPage } from './components/merchant-page';
