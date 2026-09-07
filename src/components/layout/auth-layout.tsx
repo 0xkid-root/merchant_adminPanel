@@ -1,50 +1,44 @@
 import React from "react";
 import Image from "next/image";
-import { ShieldCheck, Eye, Zap } from "lucide-react";
 
-function LogoIcon() {
+export function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-      <path d="M12 2L2 22H22L12 2Z" fill="currentColor" fillOpacity="0.2"/>
-      <path d="M12 2L2 22H10L15 12L12 2Z" fill="currentColor"/>
-      <path d="M7 16L12 6L17 16H7Z" fill="white"/>
-    </svg>
-  );
-}
+    <main className="h-screen overflow-hidden bg-[#F6F4FF] p-0 sm:p-4 lg:p-5">
 
-export function AuthLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex min-h-screen w-full bg-white">
-      {/* Left Column - Form */}
-      <div className="flex w-full flex-col justify-center px-8 sm:px-16 lg:w-1/2 xl:px-32 bg-white">
-        <div className="mx-auto w-full max-w-[400px]">
-          <div className="mb-12 flex items-center gap-2">
-            <LogoIcon />
-            <div className="flex flex-col leading-none">
-              <span className="text-2xl font-bold text-[#1F2A44] tracking-tight">AtMoonPe</span>
-              <span className="text-[13px] font-medium text-muted-foreground">Admin Portal</span>
+      <div className="h-full w-full overflow-hidden bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] ring-1 ring-slate-200/50 sm:rounded-[24px]">
+
+        <div className="grid h-full w-full lg:grid-cols-[42%_58%]">
+
+          {/* LEFT - AUTH */}
+          <div className="flex h-full items-center justify-center bg-white px-5 py-8 sm:px-8 lg:px-12 xl:px-16">
+            <div className="w-full max-w-[440px]">
+              {children}
             </div>
           </div>
-          
-          {children}
-          
-          <div className="mt-12 flex items-center gap-3 text-sm text-muted-foreground/80">
-             <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-             <p className="leading-snug">Secure admin access to manage your entire payments ecosystem.</p>
-          </div>
-        </div>
-      </div>
 
-      {/* Right Column - Image */}
-      <div className="hidden w-1/2 relative lg:block bg-slate-50/50">
-        <Image 
-          src="/login/login-image.png" 
-          alt="Login Background"
-          fill
-          className="object-contain p-8 lg:p-16"
-          priority
-        />
+          {/* RIGHT - VISUAL */}
+          <div className="relative hidden h-full overflow-hidden lg:block bg-[#F8F7FF]">
+            {/* Ambient Background Glows */}
+            <div className="absolute -top-[20%] -right-[10%] h-[70%] w-[70%] rounded-full bg-primary/15 blur-[120px]" />
+            <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-primary/10 blur-[100px]" />
+
+            <Image
+              src="/login/login-image.png"
+              alt="AtMoonPe Admin Platform"
+              fill
+              priority
+              className="relative z-10 object-cover object-center"
+              sizes="58vw"
+            />
+          </div>
+
+        </div>
+
       </div>
-    </div>
+    </main>
   );
 }
