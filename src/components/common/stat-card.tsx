@@ -11,6 +11,8 @@ interface StatCardProps {
   trendLabel?: string;
   trendUp?: boolean;
   alertText?: string;
+  actionLabel?: string;
+  onActionClick?: () => void;
 }
 
 export function StatCard({
@@ -23,42 +25,59 @@ export function StatCard({
   trendLabel,
   trendUp,
   alertText,
+  actionLabel,
+  onActionClick,
 }: StatCardProps) {
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm ring-1 ring-slate-100/50 transition-shadow hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+    <div className={cn(
+      "flex flex-col justify-between rounded-xl border bg-white p-5 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)] transition-shadow hover:shadow-sm dark:bg-slate-900",
+      alertText ? "border-amber-200/60 dark:border-amber-900/30" : "border-slate-200 dark:border-slate-800"
+    )}>
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
-          <span className="text-sm font-medium text-slate-500">{title}</span>
-          <span className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <span className="text-[13px] font-medium text-slate-500">{title}</span>
+          <span className="mt-1.5 text-2xl font-bold tracking-tight text-slate-900 tabular-nums dark:text-white">
             {value}
           </span>
         </div>
-        <div className={cn("flex h-10 w-10 items-center justify-center rounded-xl", iconBgClass, iconColorClass)}>
-          <Icon className="h-5 w-5" />
+        <div className={cn("flex h-8 w-8 items-center justify-center text-slate-400", iconColorClass)}>
+          <Icon className="h-4 w-4" />
         </div>
       </div>
-      {(trendValue || alertText) && (
-        <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
-          {trendValue && (
-            <span
-              className={cn(
-                "flex items-center font-medium",
-                trendUp !== undefined
-                  ? trendUp
-                    ? "text-emerald-600"
-                    : "text-red-600"
-                  : "text-slate-700 dark:text-slate-300"
-              )}
-            >
-              {trendUp ? "+" : ""}{trendValue}
-            </span>
-          )}
-          {alertText && (
-            <span className="font-medium text-amber-600">{alertText}</span>
-          )}
-          {trendLabel && <span>{trendLabel}</span>}
-        </div>
-      )}
+      
+      <div className="mt-4 flex flex-col gap-1.5">
+        {(trendValue || alertText) && (
+          <div className="flex items-center gap-1.5 text-[13px] text-slate-500">
+            {trendValue && (
+              <span
+                className={cn(
+                  "flex items-center font-medium",
+                  trendUp !== undefined
+                    ? trendUp
+                      ? "text-emerald-600"
+                      : "text-slate-600"
+                    : "text-slate-700 dark:text-slate-300"
+                )}
+              >
+                {trendUp ? "↑ " : ""}{trendValue}
+              </span>
+            )}
+            {alertText && (
+              <span className="font-medium text-amber-600">{alertText}</span>
+            )}
+            {trendLabel && <span className="truncate">{trendLabel}</span>}
+          </div>
+        )}
+        
+        {actionLabel && (
+          <button
+            onClick={onActionClick}
+            className="mt-1 flex w-fit items-center text-[13px] font-medium text-primary hover:text-primary/80 hover:underline underline-offset-2 transition-all"
+          >
+            {actionLabel} <span className="ml-1 text-lg leading-none">→</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
