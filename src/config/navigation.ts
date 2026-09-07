@@ -111,23 +111,6 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
     label: "Platform",
     items: [
       {
-        title: "API Management",
-        icon: Code2,
-        children: [
-          { title: "Credentials", href: "/api-management/credentials" },
-          { title: "API Logs", href: "/api-management/logs" },
-          { title: "Rate Limits", href: "/api-management/limits" },
-        ],
-      },
-      {
-        title: "Webhooks",
-        icon: Webhook,
-        children: [
-          { title: "Events", href: "/webhooks/events" },
-          { title: "Logs", href: "/webhooks/logs" },
-        ],
-      },
-      {
         title: "Users & RBAC",
         icon: UserCog,
         children: [

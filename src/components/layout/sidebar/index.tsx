@@ -22,13 +22,13 @@ export function Sidebar({
     <SidebarContext.Provider value={{ isCollapsed, activeGroup: null }}>
       <div
         className={cn(
-          "relative z-20 flex h-full flex-col border-r border-slate-200 bg-white transition-all duration-300 ease-in-out dark:border-slate-800 dark:bg-slate-950",
+          "relative z-20 flex h-full flex-col bg-transparent transition-all duration-300 ease-in-out px-2",
           isCollapsed ? "w-[72px]" : "w-[248px]",
           className
         )}
       >
         <SidebarHeader onClose={onClose} />
-        
+
         {/* Desktop Collapse Toggle */}
         {onToggleCollapse && (
           <button
@@ -38,9 +38,9 @@ export function Sidebar({
             {isCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
           </button>
         )}
-        
+
         <SidebarNavigation />
-        
+
         <SidebarFooter />
       </div>
     </SidebarContext.Provider>
