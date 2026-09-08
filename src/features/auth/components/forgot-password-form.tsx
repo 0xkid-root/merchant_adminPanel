@@ -43,10 +43,10 @@ export function ForgotPasswordForm() {
 
       {/* Title Area */}
       <div className="mb-8">
-        <h2 className="mb-2.5 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[34px]">
+        <h2 className="mb-2 text-[24px] font-bold tracking-tight text-slate-900 sm:text-[28px]">
           Forgot Password?
         </h2>
-        <p className="text-base font-medium leading-relaxed text-slate-500">
+        <p className="text-[14px] font-medium leading-relaxed text-slate-500">
           Enter your registered email address and we'll send you instructions to reset your password.
         </p>
       </div>
@@ -54,21 +54,21 @@ export function ForgotPasswordForm() {
       {/* Form */}
       <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
         {/* Email Field */}
-        <div className="space-y-2.5">
-          <Label htmlFor="email" className="text-sm font-semibold text-slate-700">Email Address</Label>
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-[13px] font-semibold text-slate-700">Email Address</Label>
           <div className="relative group">
-            <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary" />
+            <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary" />
             <Input
               id="email"
               type="email"
               placeholder="Enter your email address"
-              className="h-[52px] rounded-xl border-slate-200 bg-white/50 pl-12 text-base transition-all placeholder:text-slate-400 hover:bg-white focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:border-primary"
+              className="h-11 rounded-lg border border-slate-200 bg-slate-50/50 pl-10 text-[14px] font-medium transition-all placeholder:text-slate-400 hover:bg-slate-100 focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-sm"
             />
           </div>
         </div>
 
         {/* Submit Button */}
-        <Button className="h-[52px] w-full rounded-xl bg-primary text-[15px] font-semibold text-white shadow-[0_4px_14px_0_rgba(99,102,241,0.25)] transition-all hover:-translate-y-[1px] hover:bg-primary/95 hover:shadow-[0_6px_20px_rgba(99,102,241,0.3)]" type="submit">
+        <Button className="h-11 w-full rounded-lg bg-primary text-[14px] font-semibold text-white shadow-sm transition-all hover:bg-primary/95" type="submit">
           Send Reset Link
         </Button>
 
@@ -86,7 +86,7 @@ export function ForgotPasswordForm() {
           href="/login"
           className={cn(
             buttonVariants({ variant: "outline" }),
-            "flex h-[52px] w-full justify-center rounded-xl border-slate-200 text-[15px] font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900"
+            "flex h-11 w-full justify-center rounded-lg border-slate-200 text-[14px] font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900"
           )}
         >
           Back to Login
@@ -94,7 +94,7 @@ export function ForgotPasswordForm() {
       </form>
 
       {/* Security Message */}
-      <div className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-slate-50/80 px-4 py-3 text-sm font-medium text-slate-500 ring-1 ring-slate-100">
+      <div className="mt-8 flex items-center justify-center gap-2 text-[13px] font-medium text-slate-500 rounded-lg bg-slate-50 px-4 py-3 border border-slate-100">
         <ShieldCheck className="h-4 w-4 shrink-0 text-primary" />
         <p>A secure reset link will be sent directly to your inbox.</p>
       </div>
