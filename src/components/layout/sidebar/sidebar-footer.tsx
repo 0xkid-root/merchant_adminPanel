@@ -21,7 +21,7 @@ export function SidebarFooter() {
       
       {/* Environment Indicator (Expanded Only) */}
       {!isCollapsed && (
-        <div className="mb-3 px-3 flex items-center gap-2 text-xs font-medium text-slate-500">
+        <div className="mb-2.5 px-3 flex items-center gap-2 text-[12px] font-semibold text-slate-500">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -33,16 +33,16 @@ export function SidebarFooter() {
       {/* Profile Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger className={cn(
-          "flex w-full items-center rounded-xl p-2 outline-none transition-colors hover:bg-slate-50 focus-visible:bg-slate-50 dark:hover:bg-slate-800/50 dark:focus-visible:bg-slate-800/50",
+          "flex w-full items-center rounded-md p-2 outline-none transition-colors hover:bg-slate-50 focus-visible:bg-slate-50 dark:hover:bg-slate-800/50 dark:focus-visible:bg-slate-800/50",
           isCollapsed ? "justify-center" : "justify-between"
         )}>
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[13px] font-bold text-primary">
+            <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-md bg-primary/10 text-[13px] font-bold text-primary">
               JD
             </div>
             {!isCollapsed && (
               <div className="flex flex-col items-start overflow-hidden text-left">
-                <span className="w-full truncate text-[14px] font-semibold text-slate-900 dark:text-white">John Doe</span>
+                <span className="w-full truncate text-[13px] font-bold text-slate-900 dark:text-white">John Doe</span>
                 <span className="w-full truncate text-[12px] font-medium text-slate-500">Super Admin</span>
               </div>
             )}

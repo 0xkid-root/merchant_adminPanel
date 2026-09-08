@@ -30,10 +30,10 @@ export default function PayoutsPage() {
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Volume (Today)" value="₹8.45 Cr" icon={ArrowUpRight} iconBgClass="bg-primary/10" iconColorClass="text-primary" />
-        <StatCard title="Successful" value="1,284" icon={CheckCircle2} iconBgClass="bg-emerald-500/10" iconColorClass="text-emerald-600" />
-        <StatCard title="Processing" value="45" icon={Clock} iconBgClass="bg-blue-500/10" iconColorClass="text-blue-600" />
-        <StatCard title="Failed" value="12" icon={XCircle} iconBgClass="bg-red-500/10" iconColorClass="text-red-600" alertText="Needs retry" />
+        <StatCard title="Total Volume (Today)" value="₹8.45 Cr" icon={ArrowUpRight} iconColorClass="text-primary" />
+        <StatCard title="Successful" value="1,284" icon={CheckCircle2} iconColorClass="text-emerald-600" />
+        <StatCard title="Processing" value="45" icon={Clock} iconColorClass="text-blue-600" />
+        <StatCard title="Failed" value="12" icon={XCircle} iconColorClass="text-red-600" alertText="Needs retry" />
       </div>
 
       <div className="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">
