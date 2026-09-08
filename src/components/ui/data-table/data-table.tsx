@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
   sorting: SortingState;
   onSortingChange: OnChangeFn<SortingState>;
   isLoading?: boolean;
+  hidePagination?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -40,6 +41,7 @@ export function DataTable<TData, TValue>({
   sorting,
   onSortingChange,
   isLoading,
+  hidePagination = false,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -109,7 +111,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {!hidePagination && <DataTablePagination table={table} />}
     </div>
   );
 }
