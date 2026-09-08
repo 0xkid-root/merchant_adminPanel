@@ -32,17 +32,17 @@ export function VerifyOtpForm() {
 
       <Link 
         href="/login" 
-        className="inline-flex items-center text-sm font-semibold text-slate-500 hover:text-[#1E293B] transition-colors mb-8 w-fit"
+        className="inline-flex items-center text-[13px] font-bold text-slate-500 hover:text-slate-900 transition-colors mb-8 w-fit"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Login
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-[28px] sm:text-[32px] font-bold tracking-tight text-[#1E293B] mb-2 sm:mb-3">Verify Your Identity</h1>
-        <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+        <h1 className="text-[24px] sm:text-[28px] font-bold tracking-tight text-slate-900 mb-2 sm:mb-3">Verify Your Identity</h1>
+        <p className="text-[14px] text-slate-500 leading-relaxed font-medium">
           We've sent a 6-digit verification code to:<br/>
-          <span className="font-medium text-[#1E293B]">admin@atmoonpe.com</span><br/>
+          <span className="font-medium text-slate-900">admin@atmoonpe.com</span><br/>
           Enter the code below to continue.
         </p>
       </div>
@@ -50,28 +50,28 @@ export function VerifyOtpForm() {
       <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
         {/* OTP Field */}
         <div className="space-y-3">
-          <div className="text-sm font-semibold text-[#1E293B]">Verification Code</div>
+          <div className="text-[13px] font-semibold text-slate-700">Verification Code</div>
           <div className="flex gap-2 sm:gap-3 justify-between">
             {[1, 2, 3, 4, 5, 6].map((i) => (
                <Input 
                  key={i}
                  type="text" 
                  maxLength={1}
-                 className="w-11 h-12 sm:w-12 sm:h-12 rounded-xl text-center text-xl font-bold bg-white border-slate-200 focus-visible:ring-primary focus-visible:ring-offset-0 transition-all"
+                 className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg text-center text-[18px] font-bold bg-slate-50/50 border border-slate-200 transition-all focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-sm"
                />
             ))}
           </div>
           
           <div className="flex items-center justify-between pt-2">
-            <span className="text-sm text-slate-500 font-medium">Didn't receive the code?</span>
-            <button type="button" className="text-sm font-semibold text-primary hover:text-primary/90 hover:underline transition-colors focus:outline-none">
+            <span className="text-[13px] text-slate-500 font-medium">Didn't receive the code?</span>
+            <button type="button" className="text-[13px] font-bold text-primary hover:text-primary/90 hover:underline transition-colors focus:outline-none">
               Resend Code (00:45)
             </button>
           </div>
         </div>
 
         {/* Submit Button */}
-        <Button className="w-full h-12 rounded-xl text-sm sm:text-base font-semibold bg-primary hover:bg-primary/90 transition-colors shadow-sm mt-2" type="submit">
+        <Button className="w-full h-11 rounded-lg text-[14px] font-semibold bg-primary hover:bg-primary/95 transition-all shadow-sm mt-2 text-white" type="submit">
           Verify Code
         </Button>
       </form>

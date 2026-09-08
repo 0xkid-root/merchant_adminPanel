@@ -21,19 +21,19 @@ export function SidebarItem({ item }: { item: NavItem }) {
       href={item.href}
       title={isCollapsed ? item.title : undefined}
       className={cn(
-        "group relative flex items-center rounded-lg py-2.5 text-[14px] font-medium transition-all duration-200 outline-none my-0.5",
+        "group relative flex items-center rounded-md py-[9px] text-[13px] font-semibold transition-all duration-200 outline-none my-[2px]",
         isCollapsed ? "justify-center px-0" : "gap-3 px-3",
         isActive
-          ? "bg-primary/5 text-primary dark:bg-primary/10 dark:text-primary"
-          : "text-slate-500 hover:bg-slate-100 hover:text-slate-900 focus-visible:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50 dark:hover:text-white"
+          ? "bg-primary/[0.04] text-primary dark:bg-primary/10 dark:text-primary"
+          : "text-slate-500 hover:bg-slate-50 hover:text-slate-900 focus-visible:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800/50 dark:hover:text-white"
       )}
     >
       {/* Active Indicator Line */}
       {isActive && !isCollapsed && (
-        <div className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-primary" />
+        <div className="absolute left-0 top-1/2 h-4 w-[3px] -translate-y-1/2 rounded-r bg-primary" />
       )}
 
-      <Icon className={cn("h-5 w-5 shrink-0 transition-colors", isActive ? "text-primary" : "text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300")} />
+      <Icon className={cn("h-[18px] w-[18px] shrink-0 transition-colors", isActive ? "text-primary" : "text-slate-400 group-hover:text-slate-500 dark:group-hover:text-slate-300")} />
 
       {!isCollapsed && (
         <span className="truncate">{item.title}</span>

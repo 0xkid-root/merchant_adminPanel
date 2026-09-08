@@ -28,9 +28,9 @@ export default function SettlementPage() {
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard title="Pending Settlements (Today)" value="₹10.50 L" icon={Landmark} iconBgClass="bg-amber-500/10" iconColorClass="text-amber-600" />
-        <StatCard title="Processed (Yesterday)" value="₹69.50 L" icon={CheckCircle2} iconBgClass="bg-emerald-500/10" iconColorClass="text-emerald-600" />
-        <StatCard title="Discrepancies" value="0" icon={Landmark} iconBgClass="bg-primary/10" iconColorClass="text-primary" />
+        <StatCard title="Pending Settlements (Today)" value="₹10.50 L" icon={Landmark} iconColorClass="text-amber-600" />
+        <StatCard title="Processed (Yesterday)" value="₹69.50 L" icon={CheckCircle2} iconColorClass="text-emerald-600" />
+        <StatCard title="Discrepancies" value="0" icon={Landmark} iconColorClass="text-primary" />
       </div>
 
       <div className="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">

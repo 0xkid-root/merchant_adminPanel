@@ -5,7 +5,6 @@ interface StatCardProps {
   title: string;
   value: string | number;
   icon: LucideIcon;
-  iconBgClass?: string;
   iconColorClass?: string;
   trendValue?: string;
   trendLabel?: string;
@@ -19,8 +18,7 @@ export function StatCard({
   title,
   value,
   icon: Icon,
-  iconBgClass = "bg-primary/10",
-  iconColorClass = "text-primary",
+  iconColorClass = "text-slate-400",
   trendValue,
   trendLabel,
   trendUp,
@@ -30,18 +28,18 @@ export function StatCard({
 }: StatCardProps) {
   return (
     <div className={cn(
-      "flex flex-col justify-between rounded-xl border bg-white p-5 shadow-[0_1px_3px_0_rgba(0,0,0,0.02)] transition-shadow hover:shadow-sm dark:bg-slate-900",
-      alertText ? "border-amber-200/60 dark:border-amber-900/30" : "border-slate-200 dark:border-slate-800"
+      "flex flex-col justify-between rounded-xl border bg-white p-5 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] transition-colors hover:bg-slate-50/30 dark:bg-slate-900",
+      alertText ? "border-amber-200/60 dark:border-amber-900/30" : "border-slate-200/60 dark:border-slate-800"
     )}>
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
-          <span className="text-[13px] font-medium text-slate-500">{title}</span>
-          <span className="mt-1.5 text-2xl font-bold tracking-tight text-slate-900 tabular-nums dark:text-white">
+          <span className="text-[14px] font-medium text-slate-500">{title}</span>
+          <span className="mt-1.5 text-[28px] font-bold tracking-tight text-slate-900 tabular-nums dark:text-white">
             {value}
           </span>
         </div>
-        <div className={cn("flex h-8 w-8 items-center justify-center text-slate-400", iconColorClass)}>
-          <Icon className="h-4 w-4" />
+        <div className={cn("flex h-8 w-8 items-center justify-end", iconColorClass)}>
+          <Icon className="h-5 w-5" />
         </div>
       </div>
       

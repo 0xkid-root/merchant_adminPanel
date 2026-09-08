@@ -41,14 +41,12 @@ export default async function WalletDashboardPage() {
           title="Total Available Balance"
           value={`₹${(overview.availableBalance / 100000).toFixed(2)} L`}
           icon={Wallet}
-          iconBgClass="bg-primary/10"
           iconColorClass="text-primary"
         />
         <StatCard
           title="Total Hold Balance"
           value={`₹${(overview.holdBalance / 100000).toFixed(2)} L`}
           icon={Wallet}
-          iconBgClass="bg-amber-500/10"
           iconColorClass="text-amber-600"
           alertText="Held for processing"
         />
@@ -56,14 +54,12 @@ export default async function WalletDashboardPage() {
           title="Total Credits (MTD)"
           value={`₹${(overview.totalCredits / 100000).toFixed(2)} L`}
           icon={ArrowDownCircle}
-          iconBgClass="bg-emerald-500/10"
           iconColorClass="text-emerald-600"
         />
         <StatCard
           title="Total Debits (MTD)"
           value={`₹${(overview.totalDebits / 100000).toFixed(2)} L`}
           icon={ArrowUpCircle}
-          iconBgClass="bg-red-500/10"
           iconColorClass="text-red-600"
         />
       </div>
