@@ -2,13 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Merchant } from "../merchant.mock";
-import { MoreVertical } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Eye } from "lucide-react";
 
 const StatusBadge = ({ status }: { status: Merchant["status"] }) => {
   const styles = {
@@ -68,6 +64,15 @@ export const merchantColumns: ColumnDef<Merchant>[] = [
     cell: ({ row }) => <KycBadge status={row.original.kycStatus} />,
   },
   {
+    accessorKey: "completionPercentage",
+    header: "Completion",
+    cell: ({ row }) => (
+      <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300">
+        {row.original.completionPercentage}%
+      </span>
+    ),
+  },
+  {
     accessorKey: "walletBalance",
     header: "Wallet",
     cell: ({ row }) => {
@@ -107,18 +112,13 @@ export const merchantColumns: ColumnDef<Merchant>[] = [
   },
   {
     id: "actions",
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">
-          <span className="sr-only">Open menu</span>
-          <MoreVertical className="h-4 w-4" />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem>View Details</DropdownMenuItem>
-          <DropdownMenuItem>View Wallet</DropdownMenuItem>
-          <DropdownMenuItem className="text-red-600 focus:text-red-600">Suspend Merchant</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    cell: ({ row }) => (
+      <Link href={`/merchants/${row.original.id}`}>
+        <Button variant="outline" size="sm" className="h-8 text-[12px] font-medium">
+          <Eye className="mr-2 h-3.5 w-3.5" />
+          Review
+        </Button>
+      </Link>
     ),
   },
 ];

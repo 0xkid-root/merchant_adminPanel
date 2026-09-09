@@ -15,6 +15,7 @@ export interface Merchant {
   totalBeneficiaries: number;
   totalPayouts: number;
   successfulPayouts: number;
+  completionPercentage: number;
   // Detail level mock info
   registeredAddress?: string;
   city?: string;
@@ -48,6 +49,14 @@ const generateMockMerchants = (): Merchant[] => {
     const successfulPayouts = Math.floor(Math.random() * 5000) + 100;
     const totalPayouts = successfulPayouts + Math.floor(Math.random() * 500); // Amount in rupees roughly
 
+    // Completion is usually 100% if active, otherwise random 30-99%
+    let completionPercentage = Math.floor(Math.random() * 70) + 30;
+    if (status === "ACTIVE" && kycStatus === "APPROVED") {
+      completionPercentage = 100;
+    } else if (kycStatus === "PENDING") {
+      completionPercentage = Math.floor(Math.random() * 20) + 70; // 70-89%
+    }
+
     return {
       id: `m_${1000 + i}`,
       merchantCode: `MID-${20000 + i}`,
@@ -63,6 +72,7 @@ const generateMockMerchants = (): Merchant[] => {
       totalBeneficiaries: Math.floor(Math.random() * 500),
       totalPayouts: totalPayouts * 1500, // Roughly 1.5k average per payout
       successfulPayouts,
+      completionPercentage,
       registeredAddress: `${Math.floor(Math.random() * 999)}, Business Park, Phase ${i % 4 + 1}`,
       city: CITIES[i % CITIES.length],
       state: "Maharashtra",
