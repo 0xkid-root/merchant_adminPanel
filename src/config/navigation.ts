@@ -32,7 +32,7 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
     items: [
       {
         title: "Merchants",
-        href: "/merchant",
+        href: "/merchants",
         icon: Building2,
       },
       {
