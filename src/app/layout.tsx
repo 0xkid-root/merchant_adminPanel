@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="font-sans min-h-full flex flex-col">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
