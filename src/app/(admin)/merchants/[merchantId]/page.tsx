@@ -1,11 +1,10 @@
 import { MerchantDetailsPage } from "@/features/merchant/components/merchant-details-page";
 
 interface PageProps {
-  params: {
-    merchantId: string;
-  };
+  params: Promise<{ merchantId: string }>;
 }
 
-export default function Page({ params }: PageProps) {
-  return <MerchantDetailsPage merchantId={params.merchantId} />;
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params;
+  return <MerchantDetailsPage merchantId={resolvedParams.merchantId} />;
 }
