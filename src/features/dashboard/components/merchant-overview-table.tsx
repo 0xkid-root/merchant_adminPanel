@@ -48,7 +48,7 @@ export const dashboardMerchantColumns: ColumnDef<DashboardMerchant>[] = [
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[12px] font-bold text-primary">
           {row.original.merchantName.charAt(0)}
         </div>
-        <span className="font-semibold text-slate-900 dark:text-white">
+        <span className="font-semibold text-slate-900 dark:text-white whitespace-nowrap">
           {row.original.merchantName}
         </span>
       </div>
