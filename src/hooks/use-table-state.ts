@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { PaginationState, SortingState, ColumnFiltersState } from "@tanstack/react-table";
 import { TableQueryParams, SortParams } from "@/types/api";
 
@@ -17,15 +17,15 @@ export function useTableState({ initialPageSize = 20 }: UseTableStateProps = {})
   const [globalFilter, setGlobalFilter] = useState<string>(""); // Used for debounced search
 
   // Reset pagination when search or filters change
-  const handleGlobalFilterChange = (value: string) => {
+  const handleGlobalFilterChange = useCallback((value: string) => {
     setGlobalFilter(value);
     setPagination((prev) => ({ ...prev, pageIndex: 0 }));
-  };
+  }, []);
 
-  const handleColumnFiltersChange = (updaterOrValue: ColumnFiltersState | ((old: ColumnFiltersState) => ColumnFiltersState)) => {
+  const handleColumnFiltersChange = useCallback((updaterOrValue: ColumnFiltersState | ((old: ColumnFiltersState) => ColumnFiltersState)) => {
     setColumnFilters(updaterOrValue);
     setPagination((prev) => ({ ...prev, pageIndex: 0 }));
-  };
+  }, []);
 
   // Derived query parameters mapping local state to backend-style payload
   const queryParams: TableQueryParams = useMemo(() => {
