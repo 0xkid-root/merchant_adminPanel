@@ -113,12 +113,19 @@ export const merchantColumns: ColumnDef<Merchant>[] = [
   {
     id: "actions",
     cell: ({ row }) => (
-      <Link href={`/merchants/${row.original.id}`}>
-        <Button variant="outline" size="sm" className="h-8 text-[12px] font-medium">
-          <Eye className="mr-2 h-3.5 w-3.5" />
-          Review
-        </Button>
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link href={`/merchants/${row.original.id}`}>
+          <Button variant="outline" size="sm" className="h-8 text-[12px] font-medium text-slate-600">
+            View
+          </Button>
+        </Link>
+        <Link href={`/merchants/${row.original.id}/review`}>
+          <Button variant="outline" size="sm" className="h-8 text-[12px] font-medium">
+            <Eye className="mr-2 h-3.5 w-3.5" />
+            Review
+          </Button>
+        </Link>
+      </div>
     ),
   },
 ];
