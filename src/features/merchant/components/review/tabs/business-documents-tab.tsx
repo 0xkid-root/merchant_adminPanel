@@ -1,5 +1,5 @@
 import { Merchant } from "../../../merchant.mock";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Download, Eye, CheckCircle2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,41 +51,46 @@ export function BusinessDocumentsTab({ merchant }: { merchant: Merchant }) {
   };
 
   return (
-    <div className="space-y-4">
-      {documents.map((doc) => (
-        <Card key={doc.id} className="shadow-none border-slate-200/60 dark:border-slate-800">
-          <CardContent className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
-                <FileText className="h-6 w-6" />
+    <Card className="shadow-none border-slate-200/60 dark:border-slate-800">
+      <CardHeader className="pb-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20">
+        <CardTitle className="text-sm font-semibold text-slate-700 dark:text-slate-300">Business Documents</CardTitle>
+      </CardHeader>
+      <CardContent className="p-0">
+        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+          {documents.map((doc) => (
+            <div key={doc.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/30 transition-colors dark:hover:bg-slate-900/10">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <div className="flex flex-col">
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{doc.name}</h4>
+                  <div className="flex items-center gap-2 mt-0.5 text-[12px] text-slate-500">
+                    <span>{doc.type}</span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="hidden sm:inline">{doc.fileType}</span>
+                    <span>•</span>
+                    <span>{doc.size}</span>
+                    <span>•</span>
+                    <span>Uploaded {doc.uploadedAt}</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{doc.name}</h4>
-                <div className="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                  <span>{doc.type}</span>
-                  <span>•</span>
-                  <span>{doc.size}</span>
-                  <span>•</span>
-                  <span>Uploaded {doc.uploadedAt}</span>
+              <div className="flex items-center gap-4 sm:justify-end">
+                <StatusBadge status={doc.status} />
+                <div className="flex items-center gap-1">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-500 hover:text-slate-900">
+                    <Eye className="h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-500 hover:text-slate-900">
+                    <Download className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
-            
-            <div className="flex items-center gap-4 sm:justify-end">
-              <StatusBadge status={doc.status} />
-              
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-500 hover:text-slate-900">
-                  <Eye className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-500 hover:text-slate-900">
-                  <Download className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
