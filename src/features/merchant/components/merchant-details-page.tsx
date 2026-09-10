@@ -135,30 +135,37 @@ export function MerchantDetailsPage({ merchantId }: { merchantId: string }) {
         />
       </div>
 
-      {/* Tabs Navigation */}
-      <div className="flex space-x-1 border-b border-slate-200 dark:border-slate-800 overflow-x-auto scrollbar-hide">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors border-b-2 ${activeTab === tab.id
-                ? "border-primary text-primary"
-                : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300"
-              }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Unified Main Card for Tabs and Content */}
+      <div className="rounded-xl border border-slate-200/60 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden flex flex-col mt-4">
+        {/* Tabs Navigation */}
+        <div className="border-b border-slate-200/60 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 p-2 flex overflow-x-auto scrollbar-hide">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`whitespace-nowrap px-4 py-2.5 rounded-lg text-sm font-medium transition-all mr-1 ${
+                  isActive
+                    ? "bg-white shadow-sm border border-slate-200/60 text-primary dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100/50 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:bg-slate-800/30"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Tab Content */}
-      <div className="pt-2">
-        {activeTab === "overview" && <OverviewTab merchant={merchant} onTabChange={setActiveTab} />}
-        {activeTab === "business" && <BusinessTab merchant={merchant} />}
-        {activeTab === "kyc" && <KycTab merchant={merchant} />}
-        {activeTab === "wallet" && <WalletTab merchant={merchant} />}
-        {activeTab === "beneficiaries" && <BeneficiariesTab merchant={merchant} />}
-        {activeTab === "activity" && <ActivityTab merchant={merchant} />}
+        {/* Tab Content */}
+        <div className="bg-white dark:bg-slate-900 p-0 pb-2 [&>div]:border-0 [&>div]:rounded-none [&>div]:shadow-none">
+          {activeTab === "overview" && <OverviewTab merchant={merchant} onTabChange={setActiveTab} />}
+          {activeTab === "business" && <BusinessTab merchant={merchant} />}
+          {activeTab === "kyc" && <KycTab merchant={merchant} />}
+          {activeTab === "wallet" && <WalletTab merchant={merchant} />}
+          {activeTab === "beneficiaries" && <BeneficiariesTab merchant={merchant} />}
+          {activeTab === "activity" && <ActivityTab merchant={merchant} />}
+        </div>
       </div>
     </div>
   );

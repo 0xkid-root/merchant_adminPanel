@@ -5,7 +5,7 @@ export function BusinessDetailsTab({ merchant }: { merchant: Merchant }) {
   return (
     <Card className="shadow-none border-slate-200/60 dark:border-slate-800">
       <CardContent className="p-0">
-        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-slate-800">
+        <div className="grid grid-cols-1 divide-y divide-slate-100 dark:divide-slate-800">
           {/* Business Identity */}
           <div>
             <div className="px-4 py-3 bg-slate-50/50 dark:bg-slate-900/20 border-b border-slate-100 dark:border-slate-800">
