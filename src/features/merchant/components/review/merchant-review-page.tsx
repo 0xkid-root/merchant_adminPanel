@@ -52,59 +52,51 @@ export function MerchantReviewPage({ merchantId }: { merchantId: string }) {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col items-start gap-4">
-          <Link href="/merchants">
-            <Button variant="ghost" size="sm" className="h-8 text-slate-500 hover:text-slate-900 -ml-2">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Merchants
-            </Button>
-          </Link>
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Merchant Review
-              </h1>
-              <KycBadge status={merchant.kycStatus} />
-              <StatusBadge status={merchant.status} />
-            </div>
-            <p className="mt-1 text-sm text-slate-500 max-w-2xl">
-              Review merchant information and documents before making an approval decision.
-            </p>
-          </div>
+      <div className="flex flex-col gap-2">
+        <Link href="/merchants" className="self-start">
+          <Button variant="ghost" size="sm" className="h-8 text-slate-500 hover:text-slate-900 -ml-2">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Merchants
+          </Button>
+        </Link>
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+            Merchant Review
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Review merchant information and documents before making an approval decision.
+          </p>
         </div>
       </div>
 
       {/* Merchant Summary Card */}
-      <div className="rounded-xl border border-slate-200/60 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <p className="text-[13px] font-medium text-slate-500">Business Name</p>
-            <p className="mt-1 font-semibold text-slate-900 dark:text-white">{merchant.businessName}</p>
+      <div className="rounded-xl border border-slate-200/60 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 flex items-center justify-between flex-wrap gap-4">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-lg">
+            {merchant.businessName.charAt(0)}
           </div>
           <div>
-            <p className="text-[13px] font-medium text-slate-500">Merchant ID / MID</p>
-            <p className="mt-1 font-medium text-slate-900 dark:text-white">{merchant.merchantCode}</p>
-          </div>
-          <div>
-            <p className="text-[13px] font-medium text-slate-500">Completion</p>
-            <div className="mt-1 flex items-center gap-2">
-              <div className="h-2 w-24 rounded-full bg-slate-100 dark:bg-slate-800">
-                <div
-                  className={`h-full rounded-full ${merchant.completionPercentage === 100 ? 'bg-emerald-500' : 'bg-primary'}`}
-                  style={{ width: `${merchant.completionPercentage}%` }}
-                />
-              </div>
-              <span className="text-sm font-medium">{merchant.completionPercentage}%</span>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">{merchant.businessName}</h2>
+            <div className="flex items-center gap-3 mt-1">
+              <span className="text-sm text-slate-500 font-medium">{merchant.merchantCode}</span>
+              <StatusBadge status={merchant.status} />
+              <KycBadge status={merchant.kycStatus} />
             </div>
           </div>
-          <div>
-            <p className="text-[13px] font-medium text-slate-500">Created Date</p>
-            <p className="mt-1 font-medium text-slate-900 dark:text-white">
-              {new Date(merchant.createdAt).toLocaleDateString("en-GB")}
-            </p>
+        </div>
+        
+        <div className="flex flex-col sm:items-end">
+          <p className="text-[13px] font-medium text-slate-500 mb-1">Completion</p>
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-24 rounded-full bg-slate-100 dark:bg-slate-800">
+              <div
+                className={`h-full rounded-full ${merchant.completionPercentage === 100 ? 'bg-emerald-500' : 'bg-primary'}`}
+                style={{ width: `${merchant.completionPercentage}%` }}
+              />
+            </div>
+            <span className="text-sm font-medium">{merchant.completionPercentage}%</span>
           </div>
         </div>
       </div>
