@@ -23,6 +23,9 @@ export interface Merchant {
   pincode?: string;
   pan?: string;
   gst?: string;
+  bankName?: string;
+  accountNumber?: string;
+  ifscCode?: string;
 }
 
 const BUSINESS_TYPES = ["Private Limited", "Proprietorship", "Partnership", "Public Limited", "LLP"];
@@ -79,6 +82,9 @@ const generateMockMerchants = (): Merchant[] => {
       pincode: `40000${i % 9 + 1}`,
       pan: `ABCDE${Math.floor(1000 + Math.random() * 9000)}F`,
       gst: `27ABCDE${Math.floor(1000 + Math.random() * 9000)}F1Z5`,
+      bankName: i % 2 === 0 ? "HDFC Bank" : "ICICI Bank",
+      accountNumber: `50100${Math.floor(100000 + Math.random() * 900000)}`,
+      ifscCode: i % 2 === 0 ? "HDFC0001234" : "ICIC0005678",
     };
   });
 };
