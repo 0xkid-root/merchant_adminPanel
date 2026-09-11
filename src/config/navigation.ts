@@ -12,7 +12,8 @@ import {
   Code2,
   Webhook,
   UserCog,
-  Settings
+  Settings,
+  FileCheck
 } from "lucide-react";
 import { NavGroup } from "@/types/navigation";
 
@@ -48,6 +49,11 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
           { title: "Wallet Holds", href: "/wallet/holds" },
           { title: "Manual Adjustments", href: "/wallet/adjustments" },
         ],
+      },
+      {
+        title: "Wallet Whitelist",
+        href: "/wallet-whitelist",
+        icon: FileCheck,
       },
       {
         title: "VAN Management",
