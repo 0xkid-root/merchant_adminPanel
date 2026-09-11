@@ -8,3 +8,4 @@ export * from './components/wallet-holds-page';
 export * from './components/manual-adjustments-page';
 export * from './types/wallet.types';
 export * from './queries';
+export * from './components/wallet-details-page';

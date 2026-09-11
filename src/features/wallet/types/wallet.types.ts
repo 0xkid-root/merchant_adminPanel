@@ -4,17 +4,22 @@ export interface Wallet {
   id: string;
   merchantId: string;
   merchantName: string;
+  walletType: string;
   availableBalance: number;
   holdBalance: number;
   totalBalance: number;
   status: WalletStatus;
+  kycStatus: "Pending" | "Verified" | "Rejected";
+  transactionEnabled: boolean;
+  withdrawalEnabled: boolean;
+  creditEnabled: boolean;
   createdAt: string;
   lastActivityAt: string;
   currency: string;
 }
 
 export type WalletTransactionStatus = "Pending" | "Processing" | "Success" | "Failed" | "Reversed";
-export type WalletTransactionType = "Credit" | "Debit" | "Refund" | "Adjustment" | "Hold" | "Release" | "Payout";
+export type WalletTransactionType = "Credit" | "Debit" | "Refund" | "Adjustment" | "Hold" | "Release" | "Payout" | "Withdrawal";
 
 export interface WalletTransaction {
   id: string;
