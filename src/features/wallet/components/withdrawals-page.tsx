@@ -132,7 +132,7 @@ export function WithdrawalsPage() {
             </div>
           </div>
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val || "all")}>
               <SelectTrigger className="w-full sm:w-[150px] bg-white dark:bg-slate-900">
                 <Filter className="mr-2 h-4 w-4 text-slate-400" />
                 <SelectValue placeholder="Status" />
