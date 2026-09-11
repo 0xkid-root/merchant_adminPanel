@@ -36,16 +36,17 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
         icon: Building2,
       },
       {
-        title: "Wallet",
+        title: "Wallet Management",
         icon: WalletCards,
         children: [
           { title: "Wallet Dashboard", href: "/wallet" },
           { title: "All Wallets", href: "/wallet/all" },
+          { title: "Wallet Transactions", href: "/wallet/transactions" },
           { title: "Wallet Ledger", href: "/wallet/ledger" },
-          { title: "Transactions", href: "/wallet/transactions" },
           { title: "Fund Requests", href: "/wallet/fund-requests" },
           { title: "Withdrawal Requests", href: "/wallet/withdrawals" },
-          { title: "Wallet Whitelist", href: "/wallet/whitelist" },
+          { title: "Wallet Holds", href: "/wallet/holds" },
+          { title: "Manual Adjustments", href: "/wallet/adjustments" },
         ],
       },
       {
