@@ -13,14 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Eye, ChevronLeft, ChevronRight, FileText } from "lucide-react";
-import { DetailsDrawer } from "../details-drawer";
-import { WhitelistRequest } from "../../types/wallet-whitelist.types";
+import { useRouter } from "next/navigation";
 
 export function ApprovedTab() {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [selectedRequest, setSelectedRequest] = useState<WhitelistRequest | null>(null);
+  const router = useRouter();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -127,7 +126,7 @@ export function ApprovedTab() {
                     variant="ghost" 
                     size="sm" 
                     className="h-8 text-[13px] font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
-                    onClick={() => setSelectedRequest(req)}
+                    onClick={() => router.push(`/wallet-whitelist/${req.id}`)}
                   >
                     <Eye className="h-4 w-4 mr-2" />
                     Details
@@ -174,15 +173,6 @@ export function ApprovedTab() {
           </Button>
         </div>
       </div>
-
-      {/* Details Drawer */}
-      {selectedRequest && (
-        <DetailsDrawer 
-          isOpen={!!selectedRequest} 
-          onClose={() => setSelectedRequest(null)} 
-          request={selectedRequest} 
-        />
-      )}
     </div>
   );
 }
