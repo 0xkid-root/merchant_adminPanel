@@ -62,7 +62,21 @@ export function useWhitelistRequests(
   });
 }
 
+export function useWhitelistRequest(id: string) {
+  return useQuery({
+    queryKey: ["whitelist-request", id],
+    queryFn: async (): Promise<WhitelistRequest> => {
+      await delay(400); // Simulate API latency
+      const request = localMockData.find((req) => req.id === id);
+      if (!request) throw new Error("Request not found");
+      return request;
+    },
+    enabled: !!id,
+  });
+}
+
 export function useApproveWhitelistRequest() {
+
   const queryClient = useQueryClient();
 
   return useMutation({
