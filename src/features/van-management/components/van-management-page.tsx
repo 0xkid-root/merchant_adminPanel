@@ -4,14 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import { VanTable } from "./van-table";
-import { VanDetailsDrawer } from "./van-details-drawer";
-import { VanAccount } from "../types/van.types";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export function VanManagementPage() {
-  const [selectedVan, setSelectedVan] = useState<VanAccount | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -45,16 +44,7 @@ export function VanManagementPage() {
       </div>
 
       {/* Main Table Content */}
-      <VanTable onViewDetails={setSelectedVan} />
-
-      {/* Details Drawer */}
-      {selectedVan && (
-        <VanDetailsDrawer
-          isOpen={!!selectedVan}
-          onClose={() => setSelectedVan(null)}
-          van={selectedVan}
-        />
-      )}
+      <VanTable onViewDetails={(van) => router.push(`/van-management/${van.id}`)} />
     </div>
   );
 }

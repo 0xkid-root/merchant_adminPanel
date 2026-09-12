@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useVansQuery } from "../hooks/use-vans";
 import { VanAccount, VanStatus } from "../types/van.types";
 import { getVanColumns } from "./van-columns";
@@ -8,59 +7,60 @@ import { DataTable } from "@/components/ui/data-table/data-table";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { useTableState } from "@/hooks/use-table-state";
 
 interface VanTableProps {
   onViewDetails: (van: VanAccount) => void;
 }
 
 export function VanTable({ onViewDetails }: VanTableProps) {
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [status, setStatus] = useState<VanStatus | "All">("All");
-  const [provider, setProvider] = useState<string | "All">("All");
+  const {
+    pagination,
+    setPagination,
+    sorting,
+    setSorting,
+    globalFilter,
+    setGlobalFilter,
+    columnFilters,
+    setColumnFilters,
+    queryParams,
+  } = useTableState({ initialPageSize: 10 });
+
+  const currentStatus = (columnFilters.find((f) => f.id === "status")?.value as VanStatus | "All") || "All";
+  const currentProvider = (columnFilters.find((f) => f.id === "provider")?.value as string | "All") || "All";
 
   const { data, isLoading } = useVansQuery({
-    page,
-    size,
-    search: debouncedSearch,
-    status,
-    provider,
+    page: queryParams.page,
+    size: queryParams.size,
+    search: globalFilter,
+    status: currentStatus,
+    provider: currentProvider,
   });
 
   const columns = getVanColumns(onViewDetails);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setDebouncedSearch(e.target.value); // Simple debounce for mock
-    setPage(0);
-  };
-
-  const handleStatusChange = (val: string) => {
-    setStatus(val as VanStatus | "All");
-    setPage(0);
-  };
-
-  const handleProviderChange = (val: string) => {
-    setProvider(val);
-    setPage(0);
+  const setFilter = (id: string, value: string | null) => {
+    setColumnFilters((prev) => {
+      const existing = prev.filter((f) => f.id !== id);
+      if (!value || value === "All") return existing;
+      return [...existing, { id, value }];
+    });
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row items-center gap-4 justify-between bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm">
+    <div className="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] p-6 h-full">
+      <div className="flex flex-col sm:flex-row items-center gap-4 justify-between">
         <div className="relative w-full sm:w-96">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
           <Input 
             placeholder="Search VAN, merchant, merchant ID..." 
             className="pl-9 bg-slate-50/50 dark:bg-slate-950/50"
-            value={search}
-            onChange={handleSearch}
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
           />
         </div>
         <div className="flex w-full sm:w-auto items-center gap-3">
-          <Select value={status} onValueChange={handleStatusChange}>
+          <Select value={currentStatus} onValueChange={(val) => setFilter("status", val)}>
             <SelectTrigger className="w-[140px] bg-slate-50/50 dark:bg-slate-950/50">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
@@ -73,7 +73,7 @@ export function VanTable({ onViewDetails }: VanTableProps) {
             </SelectContent>
           </Select>
 
-          <Select value={provider} onValueChange={handleProviderChange}>
+          <Select value={currentProvider} onValueChange={(val) => setFilter("provider", val)}>
             <SelectTrigger className="w-[160px] bg-slate-50/50 dark:bg-slate-950/50">
               <SelectValue placeholder="Provider" />
             </SelectTrigger>
@@ -87,19 +87,16 @@ export function VanTable({ onViewDetails }: VanTableProps) {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm overflow-hidden">
+      <div className="relative min-h-[400px] flex-1">
         <DataTable
           columns={columns}
           data={data?.data || []}
           isLoading={isLoading}
-          pagination={{
-            pageIndex: page,
-            pageSize: size,
-            pageCount: data?.pagination.totalPages || 0,
-            total: data?.pagination.totalElements || 0,
-          }}
-          onPageChange={setPage}
-          onPageSizeChange={setSize}
+          pageCount={data?.pagination.totalPages || 0}
+          pagination={pagination}
+          onPaginationChange={setPagination}
+          sorting={sorting}
+          onSortingChange={setSorting}
         />
       </div>
     </div>
