@@ -57,7 +57,7 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
       },
       {
         title: "VAN Management",
-        href: "/van",
+        href: "/van-management",
         icon: CreditCard,
       },
       {

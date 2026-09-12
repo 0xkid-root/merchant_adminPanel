@@ -13,14 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Eye, ChevronLeft, ChevronRight, FileText } from "lucide-react";
-import { DetailsDrawer } from "../details-drawer";
-import { WhitelistRequest } from "../../types/wallet-whitelist.types";
+import { useRouter } from "next/navigation";
 
 export function PendingTab() {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [selectedRequest, setSelectedRequest] = useState<WhitelistRequest | null>(null);
+  const router = useRouter();
 
   // Simple debounce implementation
   // In a real app, use useDebounce hook
@@ -130,7 +129,7 @@ export function PendingTab() {
                     variant="outline" 
                     size="sm" 
                     className="h-8 border-slate-200 dark:border-slate-700 text-[13px] font-medium"
-                    onClick={() => setSelectedRequest(req)}
+                    onClick={() => router.push(`/wallet-whitelist/${req.id}`)}
                   >
                     <Eye className="h-4 w-4 mr-2 text-slate-400" />
                     Review
@@ -177,15 +176,6 @@ export function PendingTab() {
           </Button>
         </div>
       </div>
-
-      {/* Details Drawer */}
-      {selectedRequest && (
-        <DetailsDrawer 
-          isOpen={!!selectedRequest} 
-          onClose={() => setSelectedRequest(null)} 
-          request={selectedRequest} 
-        />
-      )}
     </div>
   );
 }
