@@ -77,7 +77,21 @@ export function useVansQuery(params: VanQueryParams) {
   });
 }
 
+export function useVanQuery(id: string) {
+  return useQuery({
+    queryKey: ["van", id],
+    queryFn: async (): Promise<VanAccount> => {
+      await delay(400); // Fake API latency
+      const van = localVansData.find((v) => v.id === id);
+      if (!van) throw new Error("VAN not found");
+      return van;
+    },
+    enabled: !!id,
+  });
+}
+
 export function useUpdateVanStatusMutation() {
+
   const queryClient = useQueryClient();
 
   return useMutation({
