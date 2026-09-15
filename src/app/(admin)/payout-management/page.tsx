@@ -19,7 +19,7 @@ export default function PayoutManagementPage() {
     columnFilters,
     setColumnFilters,
     queryParams,
-  } = useTableState();
+  } = useTableState({ initialPageSize: 10 });
 
   const statusFilter = (columnFilters.find((f) => f.id === "status")?.value as PayoutStatus | "All") || "All";
   const methodFilter = (columnFilters.find((f) => f.id === "method")?.value as PayoutMethod | "All") || "All";
