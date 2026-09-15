@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -59,7 +61,7 @@ export function PayoutFilters({
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Select value={statusFilter} onValueChange={onStatusChange}>
+        <Select value={statusFilter} onValueChange={(val) => onStatusChange(val || "All")}>
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
@@ -75,7 +77,7 @@ export function PayoutFilters({
           </SelectContent>
         </Select>
 
-        <Select value={methodFilter} onValueChange={onMethodChange}>
+        <Select value={methodFilter} onValueChange={(val) => onMethodChange(val || "All")}>
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Method" />
           </SelectTrigger>
