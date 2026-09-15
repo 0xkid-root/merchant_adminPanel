@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { PayoutRecord } from "../types/payout.types";
@@ -11,6 +13,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { MoreHorizontal, Eye, RefreshCw } from "lucide-react";
 import { useRetryPayoutMutation } from "../hooks/use-payouts";
 import { toast } from "sonner";
+import { DataTableSkeleton } from "@/components/ui/data-table/data-table-skeleton";
+import { DataTableEmpty } from "@/components/ui/data-table/data-table-empty";
 
 interface PayoutTableProps {
   data: PayoutRecord[];
@@ -124,11 +128,9 @@ export function PayoutTable({
 
         return (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
+            <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800 dark:hover:text-slate-50 dark:focus-visible:ring-slate-300 h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[160px]">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -153,17 +155,33 @@ export function PayoutTable({
   ], [router, retryMutation]);
 
   return (
-    <div className="w-full h-full">
-      <DataTable
-        columns={columns}
-        data={data}
-        isLoading={isLoading}
-        pagination={pagination}
-        pageCount={pageCount}
-        onPaginationChange={onPaginationChange}
-        sorting={sorting}
-        onSortingChange={onSortingChange}
-      />
+    <div className="relative min-h-[400px] flex-1">
+      {isLoading ? (
+        <div className="absolute inset-0">
+          <DataTableSkeleton columnCount={8} rowCount={pagination.pageSize} />
+        </div>
+      ) : data?.length === 0 ? (
+        <div className="absolute inset-0">
+          <DataTableEmpty
+            isSearchState={true}
+            onClearFilters={() => {
+              // Filters handled by parent
+            }}
+          />
+        </div>
+      ) : (
+        <div className="transition-opacity duration-200 opacity-100">
+          <DataTable
+            columns={columns}
+            data={data}
+            pagination={pagination}
+            pageCount={pageCount}
+            onPaginationChange={onPaginationChange}
+            sorting={sorting}
+            onSortingChange={onSortingChange}
+          />
+        </div>
+      )}
     </div>
   );
 }

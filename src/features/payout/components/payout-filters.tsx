@@ -1,9 +1,10 @@
-import { Input } from "@/components/ui/input";
-import { Search, X } from "lucide-react";
+"use client";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 import { PayoutStatus, PayoutMethod } from "../types/payout.types";
-import { useEffect, useState } from "react";
+import { DataTableSearch } from "@/components/ui/data-table/data-table-search";
 
 interface PayoutFiltersProps {
   searchQuery: string;
@@ -22,45 +23,28 @@ export function PayoutFilters({
   methodFilter,
   onMethodChange,
 }: PayoutFiltersProps) {
-  const [localSearch, setLocalSearch] = useState(searchQuery);
-
-  useEffect(() => {
-    setLocalSearch(searchQuery);
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (localSearch !== searchQuery) {
-        onSearchChange(localSearch);
-      }
-    }, 300);
-    return () => clearTimeout(handler);
-  }, [localSearch, onSearchChange, searchQuery]);
-
   const hasActiveFilters = statusFilter !== "All" || methodFilter !== "All" || searchQuery !== "";
 
   const handleClearFilters = () => {
-    setLocalSearch("");
     onSearchChange("");
     onStatusChange("All");
     onMethodChange("All");
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-6">
-      <div className="relative flex-1 max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-        <Input
+    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex-1 w-full max-w-lg">
+        <DataTableSearch
           placeholder="Search payout, merchant, beneficiary..."
-          className="pl-9 pr-4"
-          value={localSearch}
-          onChange={(e) => setLocalSearch(e.target.value)}
+          value={searchQuery}
+          onChange={onSearchChange}
+          className="max-w-full"
         />
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Select value={statusFilter} onValueChange={onStatusChange}>
-          <SelectTrigger className="w-[140px]">
+      <div className="flex items-center gap-3">
+        <Select value={statusFilter} onValueChange={(val) => onStatusChange(val || "All")}>
+          <SelectTrigger className="w-[140px] h-9 text-[13px] bg-white dark:bg-slate-900">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -75,8 +59,8 @@ export function PayoutFilters({
           </SelectContent>
         </Select>
 
-        <Select value={methodFilter} onValueChange={onMethodChange}>
-          <SelectTrigger className="w-[140px]">
+        <Select value={methodFilter} onValueChange={(val) => onMethodChange(val || "All")}>
+          <SelectTrigger className="w-[140px] h-9 text-[13px] bg-white dark:bg-slate-900">
             <SelectValue placeholder="Method" />
           </SelectTrigger>
           <SelectContent>
@@ -92,10 +76,10 @@ export function PayoutFilters({
           <Button
             variant="ghost"
             onClick={handleClearFilters}
-            className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
+            className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 h-9 px-2 text-[13px]"
           >
             <X className="mr-2 h-4 w-4" />
-            Clear Filters
+            Clear
           </Button>
         )}
       </div>
