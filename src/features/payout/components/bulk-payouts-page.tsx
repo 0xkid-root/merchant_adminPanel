@@ -47,7 +47,7 @@ export function BulkPayoutsPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] p-6 gap-6 max-w-7xl mx-auto w-full">
+    <div className="flex flex-col gap-6 p-6 max-w-7xl mx-auto w-full pb-10">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
@@ -69,7 +69,7 @@ export function BulkPayoutsPage() {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 min-h-0 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] p-6">
+      <div className="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] p-6">
         <PayoutFilters
           searchQuery={globalFilter}
           onSearchChange={setGlobalFilter}
@@ -78,7 +78,7 @@ export function BulkPayoutsPage() {
           methodFilter={methodFilter}
           onMethodChange={handleMethodChange}
         />
-        <div className="flex-1 min-h-0">
+        <div>
           <PayoutTable
             data={data?.data || []}
             isLoading={isLoading}
