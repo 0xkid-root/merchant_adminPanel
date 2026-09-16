@@ -151,7 +151,7 @@ export function SettlementDetailsPage({ id = 'STL-000123' }: { id?: string }) {
             <div className="p-6 border-b border-slate-100 dark:border-slate-800">
               <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Transactions in Settlement</h3>
             </div>
-            <div className="p-0">
+            <div className="p-4 sm:p-6 pt-4">
               <DataTable 
                 columns={columns} 
                 data={MOCK_TRANSACTIONS}

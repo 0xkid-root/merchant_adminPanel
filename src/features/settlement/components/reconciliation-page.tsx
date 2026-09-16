@@ -243,7 +243,7 @@ export function ReconciliationDashboardPage() {
             ))}
           </div>
         </div>
-        <div className="p-0">
+        <div className="p-4 sm:p-6 pt-4">
           <DataTable 
             columns={columns} 
             data={queryData?.data || []}
