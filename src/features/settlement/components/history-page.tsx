@@ -125,7 +125,7 @@ export function SettlementHistoryPage() {
             </div>
             
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val || 'all')}>
                 <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
@@ -138,7 +138,7 @@ export function SettlementHistoryPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={providerFilter} onValueChange={setProviderFilter}>
+              <Select value={providerFilter} onValueChange={(val) => setProviderFilter(val || 'all')}>
                 <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Provider" />
                 </SelectTrigger>
@@ -150,7 +150,7 @@ export function SettlementHistoryPage() {
                 </SelectContent>
               </Select>
               
-              <Select value={dateRange} onValueChange={setDateRange}>
+              <Select value={dateRange} onValueChange={(val) => setDateRange(val || 'last30')}>
                 <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Date Range" />
                 </SelectTrigger>

@@ -134,7 +134,7 @@ export function SettlementQueuePage() {
                   className="pl-9 w-full md:w-[250px] bg-slate-50 dark:bg-slate-900/50 border-slate-200" 
                 />
               </div>
-              <Select value={providerFilter} onValueChange={setProviderFilter}>
+              <Select value={providerFilter} onValueChange={(val) => setProviderFilter(val || 'all')}>
                 <SelectTrigger className="w-full md:w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Provider" />
                 </SelectTrigger>
