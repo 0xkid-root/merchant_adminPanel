@@ -71,12 +71,13 @@ const columns: ColumnDef<SettlementRecord>[] = [
 export function SettlementQueuePage() {
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [providerFilter, setProviderFilter] = useState('all');
   
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
   const [sorting, setSorting] = useState<any[]>([]);
 
   const { data: queryData, isLoading } = useQuery({
-    queryKey: ['settlements-queue', activeTab, pagination.pageIndex, pagination.pageSize],
+    queryKey: ['settlements-queue', activeTab, pagination.pageIndex, pagination.pageSize, providerFilter],
     queryFn: () => getSettlements({ 
       page: pagination.pageIndex + 1, 
       limit: pagination.pageSize,
@@ -100,8 +101,8 @@ export function SettlementQueuePage() {
       </div>
 
       <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4">
-          <div className="flex flex-col md:flex-row justify-between gap-4">
+        <CardHeader className="pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex flex-col md:flex-row justify-between gap-4 items-center">
             {/* Tabs */}
             <div className="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg w-full md:w-auto overflow-x-auto">
               {tabs.map((tab) => (
@@ -130,15 +131,12 @@ export function SettlementQueuePage() {
                   placeholder="Search Settlement ID..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 w-full md:w-[250px] bg-white dark:bg-slate-900" 
+                  className="pl-9 w-full md:w-[250px] bg-slate-50 dark:bg-slate-900/50 border-slate-200" 
                 />
               </div>
-              <Select defaultValue="all">
-                <SelectTrigger className="w-full md:w-[150px] bg-white dark:bg-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-slate-400" />
-                    <SelectValue placeholder="Provider" />
-                  </div>
+              <Select value={providerFilter} onValueChange={(val) => setProviderFilter(val || 'all')}>
+                <SelectTrigger className="w-full md:w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
+                  <SelectValue placeholder="Provider" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Providers</SelectItem>
