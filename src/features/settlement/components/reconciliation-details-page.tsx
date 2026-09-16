@@ -48,100 +48,117 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
         )}
       </div>
 
-      <div className="mt-8">
-        <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4">Three-way Comparison</h2>
-        <div className="flex w-full flex-col lg:flex-row rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">
+      <div className="mt-8 relative max-w-3xl mx-auto">
+        <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4 text-center">Three-way Comparison</h2>
+        <div className="flex w-full flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           
           {/* Internal System */}
-          <div className="flex-1 p-6 border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-slate-800">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
-                <Server className="w-5 h-5" />
+          <div className="flex-1 p-6 relative">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
+                  <Server className="w-5 h-5" />
+                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-white">Internal System</h3>
               </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Internal System</h3>
+              <div className="text-right">
+                <p className="text-[20px] font-bold text-slate-900 dark:text-white">{formatCurrency(record.internalAmount)}</p>
+                <p className="text-sm text-slate-500 mt-0.5">Internal Record</p>
+              </div>
             </div>
             
-            <div className="mb-6">
-              <p className="text-[20px] font-bold text-slate-900 dark:text-white">{formatCurrency(record.internalAmount)}</p>
-              <p className="text-sm text-slate-500 mt-0.5">Internal Record Amount</p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Transaction ID</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">{record.transactionId}</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+              <div>
+                <span className="block text-slate-500 mb-1">Transaction ID</span>
+                <span className="font-medium text-slate-900 dark:text-white">{record.transactionId}</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Status</span>
-                <span className="font-medium text-right text-emerald-600">Success</span>
+              <div>
+                <span className="block text-slate-500 mb-1">Status</span>
+                <span className="font-medium text-emerald-600">Success</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm pb-2">
-                <span className="text-slate-500">Created</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">
+              <div className="md:col-span-2">
+                <span className="block text-slate-500 mb-1">Created</span>
+                <span className="font-medium text-slate-900 dark:text-white">
                   {new Date(record.internalTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
             </div>
           </div>
 
+          <div className="relative flex items-center justify-center h-0 z-10">
+            <div className="absolute w-full h-[1px] bg-slate-200 dark:bg-slate-800"></div>
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[11px] font-bold px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 z-10">
+              VS
+            </div>
+          </div>
+
           {/* Bank Record */}
-          <div className={`flex-1 p-6 border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-slate-800 ${record.status === 'Mismatch' ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
-                <Landmark className="w-5 h-5" />
+          <div className={`flex-1 p-6 relative ${record.status === 'Mismatch' ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
+                  <Landmark className="w-5 h-5" />
+                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-white">Bank Record</h3>
               </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Bank Record</h3>
+              <div className="text-right">
+                <p className={`text-[20px] font-bold ${record.status === 'Mismatch' ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-white'}`}>{formatCurrency(record.bankAmount)}</p>
+                <p className="text-sm text-slate-500 mt-0.5">Bank Statement</p>
+              </div>
             </div>
             
-            <div className="mb-6">
-              <p className={`text-[20px] font-bold ${record.status === 'Mismatch' ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-white'}`}>{formatCurrency(record.bankAmount)}</p>
-              <p className="text-sm text-slate-500 mt-0.5">Bank Statement Amount</p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Bank Ref</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">{record.bankReference || '-'}</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+              <div>
+                <span className="block text-slate-500 mb-1">Bank Ref</span>
+                <span className="font-medium text-slate-900 dark:text-white">{record.bankReference || '-'}</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Status</span>
-                <span className="font-medium text-right text-emerald-600">Success</span>
+              <div>
+                <span className="block text-slate-500 mb-1">Status</span>
+                <span className="font-medium text-emerald-600">Success</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm pb-2">
-                <span className="text-slate-500">Settlement Date</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">
+              <div className="md:col-span-2">
+                <span className="block text-slate-500 mb-1">Settlement Date</span>
+                <span className="font-medium text-slate-900 dark:text-white">
                   {record.bankTimestamp ? new Date(record.bankTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '-'}
                 </span>
               </div>
             </div>
           </div>
 
+          <div className="relative flex items-center justify-center h-0 z-10">
+            <div className="absolute w-full h-[1px] bg-slate-200 dark:bg-slate-800"></div>
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[11px] font-bold px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 z-10">
+              VS
+            </div>
+          </div>
+
           {/* Payment Partner */}
-          <div className={`flex-1 p-6 ${record.status === 'Mismatch' ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
-                <Building className="w-5 h-5" />
+          <div className={`flex-1 p-6 relative ${record.status === 'Mismatch' ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-slate-100 text-slate-600 rounded-md dark:bg-slate-800 dark:text-slate-400">
+                  <Building className="w-5 h-5" />
+                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-white">Payment Partner</h3>
               </div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Payment Partner</h3>
+              <div className="text-right">
+                <p className={`text-[20px] font-bold ${record.status === 'Mismatch' ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-white'}`}>{formatCurrency(record.partnerAmount)}</p>
+                <p className="text-sm text-slate-500 mt-0.5">Provider Report</p>
+              </div>
             </div>
             
-            <div className="mb-6">
-              <p className={`text-[20px] font-bold ${record.status === 'Mismatch' ? 'text-red-600 dark:text-red-400' : 'text-slate-900 dark:text-white'}`}>{formatCurrency(record.partnerAmount)}</p>
-              <p className="text-sm text-slate-500 mt-0.5">Provider Report Amount</p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Partner Ref</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">{record.partnerReference || '-'}</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+              <div>
+                <span className="block text-slate-500 mb-1">Partner Ref</span>
+                <span className="font-medium text-slate-900 dark:text-white">{record.partnerReference || '-'}</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm border-b border-slate-50 dark:border-slate-800/50 pb-2">
-                <span className="text-slate-500">Status</span>
-                <span className="font-medium text-right text-emerald-600">Success</span>
+              <div>
+                <span className="block text-slate-500 mb-1">Status</span>
+                <span className="font-medium text-emerald-600">Success</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm pb-2">
-                <span className="text-slate-500">Processed</span>
-                <span className="font-medium text-right text-slate-900 dark:text-white">
+              <div className="md:col-span-2">
+                <span className="block text-slate-500 mb-1">Processed</span>
+                <span className="font-medium text-slate-900 dark:text-white">
                   {record.partnerTimestamp ? new Date(record.partnerTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '-'}
                 </span>
               </div>
@@ -151,9 +168,9 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
       </div>
 
       {record.difference !== 0 && (
-        <div className="mt-8">
-          <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4">Amount Comparison</h2>
-          <div className="max-w-2xl flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="mt-8 max-w-3xl mx-auto">
+          <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4 text-center">Amount Comparison</h2>
+          <div className="max-w-2xl mx-auto flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="p-6 space-y-4">
               <div className="flex justify-between items-center text-sm font-medium">
                 <span className="text-slate-600 dark:text-slate-400">AtMoonPe Internal</span>
