@@ -73,9 +73,7 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
           { title: "Single Payout", href: "/payout-management/single" },
           { title: "Direct Payout", href: "/payout-management/direct" },
           { title: "Bulk Payout", href: "/payout-management/bulk" },
-          { title: "Pending", href: "/payout-management/pending" },
-          { title: "Failed", href: "/payout-management/failed" },
-          { title: "Retry Queue", href: "/payout-management/retry-queue" },
+
         ],
       },
     ],
