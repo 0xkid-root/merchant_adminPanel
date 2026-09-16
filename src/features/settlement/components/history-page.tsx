@@ -111,8 +111,8 @@ export function SettlementHistoryPage() {
         </div>
       </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex w-full flex-col rounded-xl border border-slate-200/60 bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex flex-col md:flex-row flex-wrap gap-4 items-center justify-between">
             <div className="relative w-full md:w-[350px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -164,8 +164,8 @@ export function SettlementHistoryPage() {
               </Select>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div className="p-0">
           <DataTable 
             columns={columns} 
             data={queryData?.data || []}
@@ -176,8 +176,8 @@ export function SettlementHistoryPage() {
             onSortingChange={setSorting}
             isLoading={isLoading}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

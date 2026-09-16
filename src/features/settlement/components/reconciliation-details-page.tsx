@@ -55,17 +55,17 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Internal System */}
-          <Card className={`shadow-md border-2 relative ${record.status === 'Mismatch' ? 'border-amber-200 dark:border-amber-900/50' : 'border-emerald-200 dark:border-emerald-900/50'}`}>
+          <div className={`flex w-full flex-col rounded-xl border-2 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] relative ${record.status === 'Mismatch' ? 'border-amber-200 dark:border-amber-900/50 dark:bg-slate-900' : 'border-emerald-200 dark:border-emerald-900/50 dark:bg-slate-900'}`}>
             <div className={`absolute -top-4 left-1/2 -translate-x-1/2 p-2 rounded-full ${record.status === 'Mismatch' ? 'bg-amber-100 dark:bg-amber-900/50 text-amber-600' : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600'}`}>
               <Server className="w-6 h-6" />
             </div>
-            <CardHeader className="text-center pt-8 pb-2">
-              <CardTitle className="text-lg">Internal System</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-center">
+            <div className="text-center pt-8 pb-4">
+              <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Internal System</h3>
+            </div>
+            <div className="space-y-4 text-center">
               <div>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">{formatCurrency(record.internalAmount)}</p>
-                <p className="text-xs text-slate-500 mt-1">Internal Record Amount</p>
+                <p className="text-[12px] font-medium text-slate-500 mt-1">Internal Record Amount</p>
               </div>
               <div className="text-sm space-y-2 bg-slate-50 dark:bg-slate-900/50 rounded-lg p-3 text-left">
                 <div className="flex justify-between">
@@ -81,21 +81,21 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
                   <span>{new Date(record.internalTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Bank Record */}
-          <Card className={`shadow-md border-2 relative mt-12 lg:mt-0 ${record.status === 'Mismatch' ? 'border-red-200 dark:border-red-900/50' : 'border-emerald-200 dark:border-emerald-900/50'}`}>
+          <div className={`flex w-full flex-col rounded-xl border-2 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] relative mt-12 lg:mt-0 ${record.status === 'Mismatch' ? 'border-red-200 dark:border-red-900/50 dark:bg-slate-900' : 'border-emerald-200 dark:border-emerald-900/50 dark:bg-slate-900'}`}>
             <div className={`absolute -top-4 left-1/2 -translate-x-1/2 p-2 rounded-full ${record.status === 'Mismatch' ? 'bg-red-100 dark:bg-red-900/50 text-red-600' : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600'}`}>
               <Landmark className="w-6 h-6" />
             </div>
-            <CardHeader className="text-center pt-8 pb-2">
-              <CardTitle className="text-lg">Bank Record</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-center">
+            <div className="text-center pt-8 pb-4">
+              <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Bank Record</h3>
+            </div>
+            <div className="space-y-4 text-center">
               <div>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">{formatCurrency(record.bankAmount)}</p>
-                <p className="text-xs text-slate-500 mt-1">Bank Statement Amount</p>
+                <p className="text-[12px] font-medium text-slate-500 mt-1">Bank Statement Amount</p>
               </div>
               <div className="text-sm space-y-2 bg-slate-50 dark:bg-slate-900/50 rounded-lg p-3 text-left">
                 <div className="flex justify-between">
@@ -111,21 +111,21 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
                   <span>{record.bankTimestamp ? new Date(record.bankTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '-'}</span>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Payment Partner */}
-          <Card className={`shadow-md border-2 relative mt-12 lg:mt-0 ${record.status === 'Mismatch' ? 'border-red-200 dark:border-red-900/50' : 'border-emerald-200 dark:border-emerald-900/50'}`}>
+          <div className={`flex w-full flex-col rounded-xl border-2 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] relative mt-12 lg:mt-0 ${record.status === 'Mismatch' ? 'border-red-200 dark:border-red-900/50 dark:bg-slate-900' : 'border-emerald-200 dark:border-emerald-900/50 dark:bg-slate-900'}`}>
             <div className={`absolute -top-4 left-1/2 -translate-x-1/2 p-2 rounded-full ${record.status === 'Mismatch' ? 'bg-red-100 dark:bg-red-900/50 text-red-600' : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600'}`}>
               <Building className="w-6 h-6" />
             </div>
-            <CardHeader className="text-center pt-8 pb-2">
-              <CardTitle className="text-lg">Payment Partner</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-center">
+            <div className="text-center pt-8 pb-4">
+              <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Payment Partner</h3>
+            </div>
+            <div className="space-y-4 text-center">
               <div>
                 <p className="text-3xl font-bold text-slate-900 dark:text-white">{formatCurrency(record.partnerAmount)}</p>
-                <p className="text-xs text-slate-500 mt-1">Provider Report Amount</p>
+                <p className="text-[12px] font-medium text-slate-500 mt-1">Provider Report Amount</p>
               </div>
               <div className="text-sm space-y-2 bg-slate-50 dark:bg-slate-900/50 rounded-lg p-3 text-left">
                 <div className="flex justify-between">
@@ -141,14 +141,14 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
                   <span>{record.partnerTimestamp ? new Date(record.partnerTimestamp).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '-'}</span>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto pt-10">
-        <Card className={`shadow-sm border-2 ${record.difference === 0 ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/10' : 'border-red-500 bg-red-50 dark:bg-red-900/10'}`}>
-          <CardContent className="p-6 flex items-center justify-between">
+        <div className={`flex w-full flex-col rounded-xl border-2 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] ${record.difference === 0 ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/10' : 'border-red-500 bg-red-50 dark:bg-red-900/10'}`}>
+          <div className="p-6 flex items-center justify-between">
             <div className="flex items-center gap-4">
               {record.difference === 0 ? (
                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 rounded-full">
@@ -176,8 +176,8 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
                 {formatCurrency(record.difference)}
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

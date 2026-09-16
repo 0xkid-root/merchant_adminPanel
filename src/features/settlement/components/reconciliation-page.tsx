@@ -1,12 +1,5 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { formatCurrency, getReconciliations } from '../api/mock';
-import { useQuery } from '@tanstack/react-query';
-import { DataTable } from '@/components/ui/data-table/data-table';
-import { ColumnDef } from '@tanstack/react-table';
 import { ReconciliationRecord } from '../types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -153,32 +146,35 @@ export function ReconciliationDashboardPage() {
         />
       </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="flex flex-row items-center justify-between">
+      <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-row items-center justify-between mb-2">
           <div>
-            <CardTitle>Reconciliation Trend</CardTitle>
-            <p className="text-sm text-slate-500 mt-1">Match vs Mismatch rates over time</p>
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Reconciliation Trend</h3>
+            <p className="text-[12px] font-medium text-slate-500 mt-1">Match vs Mismatch rates over time</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2 rounded-md border border-slate-200 bg-white p-0.5 dark:border-slate-800 dark:bg-slate-900">
             {['7D', '30D', '90D'].map(t => (
               <button 
                 key={t}
                 onClick={() => setTimeRange(t)}
-                className={`px-3 py-1 text-xs font-medium rounded-full ${timeRange === t ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400'}`}
+                className={`flex items-center gap-1 rounded px-2.5 py-1 text-[13px] font-semibold transition-colors ${timeRange === t ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
               >
                 {t}
               </button>
             ))}
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[250px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trendData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+        </div>
+        <div className="flex-1 mt-4 relative">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorMatched" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.1}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorReview" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
@@ -214,15 +210,14 @@ export function ReconciliationDashboardPage() {
                 />
                 <Area type="monotone" dataKey="matched" stroke="#10b981" fillOpacity={1} fill="url(#colorMatched)" />
                 <Area type="monotone" dataKey="mismatch" stroke="#ef4444" fillOpacity={0} />
-                <Area type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={0} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+                <Area type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={1} fill="url(#colorReview)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4">
+      <div className="flex w-full flex-col rounded-xl border border-slate-200/60 bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg w-fit overflow-x-auto">
             {tabs.map((tab) => (
               <button
@@ -241,8 +236,8 @@ export function ReconciliationDashboardPage() {
               </button>
             ))}
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div className="p-0">
           <DataTable 
             columns={columns} 
             data={queryData?.data || []}
@@ -253,8 +248,8 @@ export function ReconciliationDashboardPage() {
             onSortingChange={setSorting}
             isLoading={isLoading}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
