@@ -48,8 +48,8 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
         )}
       </div>
 
-      <div className="mt-8 relative max-w-3xl mx-auto">
-        <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4 text-center">Three-way Comparison</h2>
+      <div className="mt-8 relative">
+        <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4">Three-way Comparison</h2>
         <div className="flex w-full flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           
           {/* Internal System */}
@@ -168,9 +168,9 @@ export function ReconciliationDetailsPage({ id = 'REC-1002' }: { id?: string }) 
       </div>
 
       {record.difference !== 0 && (
-        <div className="mt-8 max-w-3xl mx-auto">
-          <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4 text-center">Amount Comparison</h2>
-          <div className="max-w-2xl mx-auto flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="mt-8">
+          <h2 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-4">Amount Comparison</h2>
+          <div className="flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="p-6 space-y-4">
               <div className="flex justify-between items-center text-sm font-medium">
                 <span className="text-slate-600 dark:text-slate-400">AtMoonPe Internal</span>
