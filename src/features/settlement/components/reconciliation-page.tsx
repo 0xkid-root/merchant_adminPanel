@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency, getReconciliations } from '../api/mock';
 import { useQuery } from '@tanstack/react-query';
@@ -11,7 +10,7 @@ import { ReconciliationRecord } from '../types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Download, AlertCircle, CheckCircle2, FileText, Clock } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { StatCard } from '@/components/common/stat-card';
 
 const trendData = [
@@ -153,32 +152,37 @@ export function ReconciliationDashboardPage() {
         />
       </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="flex flex-row items-center justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Reconciliation Trend */}
+        <div className="lg:col-span-2 flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-row items-center justify-between mb-2">
           <div>
-            <CardTitle>Reconciliation Trend</CardTitle>
-            <p className="text-sm text-slate-500 mt-1">Match vs Mismatch rates over time</p>
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Reconciliation Trend</h3>
+            <p className="text-[12px] font-medium text-slate-500 mt-1">Match vs Mismatch rates over time</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2 rounded-md border border-slate-200 bg-white p-0.5 dark:border-slate-800 dark:bg-slate-900">
             {['7D', '30D', '90D'].map(t => (
               <button 
                 key={t}
                 onClick={() => setTimeRange(t)}
-                className={`px-3 py-1 text-xs font-medium rounded-full ${timeRange === t ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400'}`}
+                className={`flex items-center gap-1 rounded px-2.5 py-1 text-[13px] font-semibold transition-colors ${timeRange === t ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
               >
                 {t}
               </button>
             ))}
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[250px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trendData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+        </div>
+        <div className="flex-1 mt-4 relative">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={trendData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorMatched" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.1}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorReview" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
@@ -214,15 +218,86 @@ export function ReconciliationDashboardPage() {
                 />
                 <Area type="monotone" dataKey="matched" stroke="#10b981" fillOpacity={1} fill="url(#colorMatched)" />
                 <Area type="monotone" dataKey="mismatch" stroke="#ef4444" fillOpacity={0} />
-                <Area type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={0} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+                <Area type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={1} fill="url(#colorReview)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4">
+      {/* Match Distribution */}
+      <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="mb-2">
+          <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Match Distribution</h3>
+          <p className="text-[12px] font-medium text-slate-500 mt-1">Current status breakdown</p>
+        </div>
+        <div className="relative flex-1 flex flex-col items-center justify-center">
+          <div className="h-[220px] w-full relative">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: 'Matched', value: 98.6, color: '#10b981' },
+                    { name: 'Mismatch', value: 1.1, color: '#ef4444' },
+                    { name: 'Pending Review', value: 0.3, color: '#f59e0b' },
+                  ]}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={65}
+                  outerRadius={85}
+                  paddingAngle={2}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {[
+                    { name: 'Matched', value: 98.6, color: '#10b981' },
+                    { name: 'Mismatch', value: 1.1, color: '#ef4444' },
+                    { name: 'Pending Review', value: 0.3, color: '#f59e0b' },
+                  ].map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip 
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded shadow-lg text-sm">
+                          <span className="font-medium text-slate-900 dark:text-white">{payload[0].name}: </span>
+                          <span className="text-slate-600 dark:text-slate-400">{payload[0].value}%</span>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">98.6%</span>
+              <span className="text-[11px] font-medium text-slate-500">Matched</span>
+            </div>
+          </div>
+          
+          <div className="w-full mt-2 space-y-2">
+            {[
+              { name: 'Matched', value: 98.6, color: 'bg-emerald-500' },
+              { name: 'Mismatch', value: 1.1, color: 'bg-red-500' },
+              { name: 'Pending Review', value: 0.3, color: 'bg-amber-500' },
+            ].map((item) => (
+              <div key={item.name} className="flex items-center justify-between text-[13px]">
+                <div className="flex items-center gap-2">
+                  <span className={`w-2.5 h-2.5 rounded-full ${item.color}`}></span>
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">{item.name}</span>
+                </div>
+                <span className="font-semibold text-slate-900 dark:text-white">{item.value}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div className="flex w-full flex-col rounded-xl border border-slate-200/60 bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg w-fit overflow-x-auto">
             {tabs.map((tab) => (
               <button
@@ -241,8 +316,8 @@ export function ReconciliationDashboardPage() {
               </button>
             ))}
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div className="p-4 sm:p-6 pt-4">
           <DataTable 
             columns={columns} 
             data={queryData?.data || []}
@@ -253,8 +328,8 @@ export function ReconciliationDashboardPage() {
             onSortingChange={setSorting}
             isLoading={isLoading}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Search, Filter, Download } from 'lucide-react';
@@ -100,8 +99,8 @@ export function SettlementQueuePage() {
         </Button>
       </div>
 
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex w-full flex-col rounded-xl border border-slate-200/60 bg-white shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex flex-col md:flex-row justify-between gap-4 items-center">
             {/* Tabs */}
             <div className="flex bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg w-full md:w-auto overflow-x-auto">
@@ -147,8 +146,8 @@ export function SettlementQueuePage() {
               </Select>
             </div>
           </div>
-        </CardHeader>
-        <CardContent>
+        </div>
+        <div className="p-4 sm:p-6 pt-4">
           <DataTable 
             columns={columns} 
             data={queryData?.data || []}
@@ -159,8 +158,8 @@ export function SettlementQueuePage() {
             onSortingChange={setSorting}
             isLoading={isLoading}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
