@@ -187,10 +187,22 @@ export function ReconciliationDashboardPage() {
                 </defs>
                 <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis 
-                  stroke="#888888" 
+                  yAxisId="left"
+                  stroke="#10b981" 
                   fontSize={12} 
                   tickLine={false} 
                   axisLine={false} 
+                  domain={[96, 100]}
+                  tickFormatter={(value) => `${value}%`}
+                />
+                <YAxis 
+                  yAxisId="right"
+                  orientation="right"
+                  stroke="#ef4444" 
+                  fontSize={12} 
+                  tickLine={false} 
+                  axisLine={false} 
+                  domain={[0, 3]}
                   tickFormatter={(value) => `${value}%`}
                 />
                 <RechartsTooltip 
@@ -201,7 +213,7 @@ export function ReconciliationDashboardPage() {
                           <p className="font-medium text-slate-900 dark:text-white mb-2">{label}</p>
                           <div className="space-y-1">
                             <p className="text-sm text-slate-600 dark:text-slate-400">
-                              Matched: <span className="font-semibold text-emerald-600">{payload[0].value}%</span>
+                              Matched: <span className="font-semibold text-emerald-600">{payload[0]?.value}%</span>
                             </p>
                             <p className="text-sm text-slate-600 dark:text-slate-400">
                               Mismatch: <span className="font-semibold text-red-500">{payload[1]?.value || 0}%</span>
@@ -216,14 +228,12 @@ export function ReconciliationDashboardPage() {
                     return null;
                   }}
                 />
-                <Area type="monotone" dataKey="matched" stroke="#10b981" fillOpacity={1} fill="url(#colorMatched)" />
-                <Area type="monotone" dataKey="mismatch" stroke="#ef4444" fillOpacity={0} />
-                <Area type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={1} fill="url(#colorReview)" />
+                <Area yAxisId="left" type="monotone" dataKey="matched" stroke="#10b981" fillOpacity={1} fill="url(#colorMatched)" />
+                <Area yAxisId="right" type="monotone" dataKey="mismatch" stroke="#ef4444" fillOpacity={0} />
+                <Area yAxisId="right" type="monotone" dataKey="review" stroke="#f59e0b" fillOpacity={1} fill="url(#colorReview)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </div>
-
       {/* Match Distribution */}
       <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
         <div className="mb-2">
