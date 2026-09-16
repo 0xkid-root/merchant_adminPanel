@@ -10,8 +10,9 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ReconciliationRecord } from '../types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Download, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Download, AlertCircle, CheckCircle2, FileText, Clock } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { StatCard } from '@/components/common/stat-card';
 
 const trendData = [
   { date: '10 Sep', matched: 98.2, mismatch: 1.5, review: 0.3 },
@@ -117,51 +118,39 @@ export function ReconciliationDashboardPage() {
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardContent className="p-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Total Records</p>
-              <h3 className="text-2xl font-bold mt-1">45,231</h3>
-            </div>
-            <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-full">
-              <AlertCircle className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardContent className="p-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Matched</p>
-              <h3 className="text-2xl font-bold mt-1 text-emerald-600">44,601</h3>
-            </div>
-            <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardContent className="p-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Mismatch</p>
-              <h3 className="text-2xl font-bold mt-1 text-red-500">497</h3>
-            </div>
-            <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full">
-              <AlertCircle className="w-5 h-5 text-red-500" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardContent className="p-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Pending Review</p>
-              <h3 className="text-2xl font-bold mt-1 text-amber-500">133</h3>
-            </div>
-            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-full">
-              <AlertCircle className="w-5 h-5 text-amber-500" />
-            </div>
-          </CardContent>
-        </Card>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Total Records"
+          value="45,231"
+          icon={FileText}
+          iconColorClass="text-blue-600"
+          trendValue="Last 30 Days"
+          trendUp={true}
+        />
+        <StatCard
+          title="Matched"
+          value="44,601"
+          icon={CheckCircle2}
+          iconColorClass="text-emerald-500"
+          trendValue="98.6% match rate"
+          trendUp={true}
+        />
+        <StatCard
+          title="Mismatch"
+          value="497"
+          icon={AlertCircle}
+          iconColorClass="text-red-500"
+          trendValue="1.1% of total"
+          trendUp={false}
+        />
+        <StatCard
+          title="Pending Review"
+          value="133"
+          icon={Clock}
+          iconColorClass="text-amber-500"
+          trendValue="Requires action"
+          trendUp={false}
+        />
       </div>
 
       <Card className="shadow-sm border-slate-200 dark:border-slate-800">
