@@ -86,9 +86,9 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
         icon: Landmark,
         children: [
           { title: "Settlement Dashboard", href: "/settlement" },
-          { title: "Queue", href: "/settlement/queue" },
-          { title: "Completed", href: "/settlement/completed" },
+          { title: "Settlement Queue", href: "/settlement/queue" },
           { title: "Reconciliation", href: "/settlement/reconciliation" },
+          { title: "Settlement History", href: "/settlement/history" },
         ],
       },
       {

@@ -1,5 +1,5 @@
-import { SettlementPage } from "@/features/reports";
+import { SettlementDashboardPage } from "@/features/settlement/components/dashboard-page";
 
 export default async function Page() {
-  return <SettlementPage />;
+  return <SettlementDashboardPage />;
 }
