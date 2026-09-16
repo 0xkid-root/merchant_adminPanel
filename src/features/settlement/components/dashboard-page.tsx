@@ -188,6 +188,7 @@ export function SettlementDashboardPage() {
                     }}
                   />
                   <Area type="monotone" dataKey="completed" stroke="#10b981" fillOpacity={1} fill="url(#colorCompleted)" />
+                  <Area type="monotone" dataKey="pending" stroke="#f59e0b" fillOpacity={1} fill="url(#colorPending)" />
                 </AreaChart>
             </ResponsiveContainer>
           </div>
