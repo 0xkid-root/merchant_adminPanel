@@ -17,8 +17,10 @@ import {
   Clock,
 } from "lucide-react";
 import {
-  AreaChart,
-  Area,
+  ComposedChart,
+  Line,
+  Bar,
+  CartesianGrid,
   XAxis,
   YAxis,
   Tooltip as RechartsTooltip,
@@ -234,26 +236,23 @@ export function ReconciliationDashboardPage() {
           </div>
           <div className="flex-1 mt-4 relative">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
+              <ComposedChart
                 data={trendData}
-                margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                margin={{ top: 20, right: 10, left: 0, bottom: 0 }}
               >
-                <defs>
-                  <linearGradient id="colorMatched" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.1} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
-                  </linearGradient>
-                  <linearGradient id="colorReview" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.1} />
-                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                  stroke="#e2e8f0"
+                  dark:stroke="#1e293b"
+                />
                 <XAxis
                   dataKey="date"
                   stroke="#888888"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
+                  dy={10}
                 />
                 <YAxis
                   yAxisId="left"
@@ -263,6 +262,7 @@ export function ReconciliationDashboardPage() {
                   axisLine={false}
                   domain={[96, 100]}
                   tickFormatter={(value) => `${value}%`}
+                  dx={-10}
                 />
                 <YAxis
                   yAxisId="right"
@@ -271,10 +271,12 @@ export function ReconciliationDashboardPage() {
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
-                  domain={[0, 3]}
+                  domain={[0, 4]}
                   tickFormatter={(value) => `${value}%`}
+                  dx={10}
                 />
                 <RechartsTooltip
+                  cursor={{ fill: "rgba(226, 232, 240, 0.4)" }}
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
                       return (
@@ -283,24 +285,26 @@ export function ReconciliationDashboardPage() {
                             {label}
                           </p>
                           <div className="space-y-1">
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
-                              Matched:{" "}
-                              <span className="font-semibold text-emerald-600">
-                                {payload[0]?.value}%
-                              </span>
-                            </p>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
-                              Mismatch:{" "}
-                              <span className="font-semibold text-red-500">
-                                {payload[1]?.value || 0}%
-                              </span>
-                            </p>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">
-                              Review:{" "}
-                              <span className="font-semibold text-amber-500">
-                                {payload[2]?.value || 0}%
-                              </span>
-                            </p>
+                            {payload.map((entry, index) => (
+                              <p
+                                key={index}
+                                className="text-sm text-slate-600 dark:text-slate-400 flex justify-between gap-4"
+                              >
+                                <span>
+                                  {entry.name === "matched"
+                                    ? "Matched"
+                                    : entry.name === "mismatch"
+                                      ? "Mismatch"
+                                      : "Review"}
+                                  :
+                                </span>
+                                <span
+                                  className={`font-semibold ${entry.name === "matched" ? "text-emerald-600" : entry.name === "mismatch" ? "text-red-500" : "text-amber-500"}`}
+                                >
+                                  {entry.value}%
+                                </span>
+                              </p>
+                            ))}
                           </div>
                         </div>
                       );
@@ -308,30 +312,40 @@ export function ReconciliationDashboardPage() {
                     return null;
                   }}
                 />
-                <Area
+                <Bar
+                  yAxisId="right"
+                  dataKey="mismatch"
+                  stackId="a"
+                  fill="#ef4444"
+                  radius={[0, 0, 0, 0]}
+                  maxBarSize={40}
+                  name="mismatch"
+                />
+                <Bar
+                  yAxisId="right"
+                  dataKey="review"
+                  stackId="a"
+                  fill="#f59e0b"
+                  radius={[4, 4, 0, 0]}
+                  maxBarSize={40}
+                  name="review"
+                />
+                <Line
                   yAxisId="left"
                   type="monotone"
                   dataKey="matched"
                   stroke="#10b981"
-                  fillOpacity={1}
-                  fill="url(#colorMatched)"
+                  strokeWidth={3}
+                  dot={{
+                    r: 4,
+                    fill: "#10b981",
+                    strokeWidth: 2,
+                    stroke: "#fff",
+                  }}
+                  activeDot={{ r: 6 }}
+                  name="matched"
                 />
-                <Area
-                  yAxisId="right"
-                  type="monotone"
-                  dataKey="mismatch"
-                  stroke="#ef4444"
-                  fillOpacity={0}
-                />
-                <Area
-                  yAxisId="right"
-                  type="monotone"
-                  dataKey="review"
-                  stroke="#f59e0b"
-                  fillOpacity={1}
-                  fill="url(#colorReview)"
-                />
-              </AreaChart>
+              </ComposedChart>
             </ResponsiveContainer>
           </div>
           {/* Match Distribution */}
