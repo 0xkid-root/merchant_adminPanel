@@ -244,7 +244,6 @@ export function ReconciliationDashboardPage() {
                   strokeDasharray="3 3"
                   vertical={false}
                   stroke="#e2e8f0"
-                  dark:stroke="#1e293b"
                 />
                 <XAxis
                   dataKey="date"
