@@ -11,6 +11,7 @@ import { DataTable } from '@/components/ui/data-table/data-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { SettlementRecord } from '../types';
 import Link from 'next/link';
+import { StatCard } from '@/components/common/stat-card';
 
 const chartData = [
   { date: '10 Sep', settlement: 8500000, completed: 8200000, pending: 300000 },
@@ -85,43 +86,37 @@ export function SettlementDashboardPage() {
       </div>
 
       {/* Top Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">Today's Settlement</CardTitle>
-            <Landmark className="w-4 h-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(12480000)}</div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">Completed</CardTitle>
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(11920000)}</div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">Pending</CardTitle>
-            <ArrowRightLeft className="w-4 h-4 text-amber-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(560000)}</div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">Reconciliation Mismatch</CardTitle>
-            <AlertCircle className="w-4 h-4 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(125000)}</div>
-          </CardContent>
-        </Card>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Today's Settlement"
+          value={formatCurrency(12480000)}
+          icon={Landmark}
+          iconColorClass="text-blue-600"
+          trendValue="12.5% vs yesterday"
+          trendUp={true}
+        />
+        <StatCard
+          title="Completed"
+          value={formatCurrency(11920000)}
+          icon={CheckCircle2}
+          iconColorClass="text-emerald-500"
+          trendValue="95.5% success rate"
+          trendUp={true}
+        />
+        <StatCard
+          title="Pending"
+          value={formatCurrency(560000)}
+          icon={ArrowRightLeft}
+          iconColorClass="text-amber-500"
+        />
+        <StatCard
+          title="Reconciliation Mismatch"
+          value={formatCurrency(125000)}
+          icon={AlertCircle}
+          iconColorClass="text-red-500"
+          trendValue="Needs review"
+          trendUp={false}
+        />
       </div>
 
       {/* Main Visuals */}
