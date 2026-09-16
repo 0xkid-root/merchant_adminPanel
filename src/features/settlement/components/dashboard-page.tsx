@@ -122,28 +122,27 @@ export function SettlementDashboardPage() {
       {/* Main Visuals */}
       <div className="grid gap-6 md:grid-cols-3">
         {/* Hero Graph */}
-        <Card className="md:col-span-2 shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader className="flex flex-row items-center justify-between">
+        <div className="md:col-span-2 flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex flex-row items-center justify-between mb-2">
             <div>
-              <CardTitle>Settlement Performance</CardTitle>
-              <p className="text-sm text-slate-500 mt-1">Total settlement vs completed vs pending</p>
+              <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Settlement Performance</h3>
+              <p className="text-[12px] font-medium text-slate-500 mt-1">Total settlement vs completed vs pending</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2 rounded-md border border-slate-200 bg-white p-0.5 dark:border-slate-800 dark:bg-slate-900">
               {['7D', '30D', '90D'].map(t => (
                 <button 
                   key={t}
                   onClick={() => setTimeRange(t)}
-                  className={`px-3 py-1 text-xs font-medium rounded-full ${timeRange === t ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400'}`}
+                  className={`flex items-center gap-1 rounded px-2.5 py-1 text-[13px] font-semibold transition-colors ${timeRange === t ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'}`}
                 >
                   {t}
                 </button>
               ))}
             </div>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[300px] w-full mt-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+          </div>
+          <div className="flex-1 mt-4 relative">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorCompleted" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
@@ -189,19 +188,17 @@ export function SettlementDashboardPage() {
                     }}
                   />
                   <Area type="monotone" dataKey="completed" stroke="#10b981" fillOpacity={1} fill="url(#colorCompleted)" />
-                  <Area type="monotone" dataKey="pending" stroke="#f59e0b" fillOpacity={1} fill="url(#colorPending)" />
                 </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
+            </ResponsiveContainer>
+          </div>
+        </div>
 
         {/* Donut Chart */}
-        <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-          <CardHeader>
-            <CardTitle>Status Distribution</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center justify-center">
+        <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-2">
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Status Distribution</h3>
+          </div>
+          <div className="relative flex-1 flex flex-col items-center justify-center">
             <div className="h-[220px] w-full relative">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -245,46 +242,44 @@ export function SettlementDashboardPage() {
                 <div key={s.name} className="flex justify-between items-center text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: s.color }}></div>
-                    <span className="text-slate-600 dark:text-slate-400">{s.name}</span>
+                    <span className="text-[12px] font-medium text-slate-500">{s.name}</span>
                   </div>
-                  <span className="font-medium text-slate-900 dark:text-white">{((s.value / 12480000) * 100).toFixed(1)}%</span>
+                  <span className="text-[13px] font-semibold text-slate-900 dark:text-white">{((s.value / 12480000) * 100).toFixed(1)}%</span>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Settlement Health */}
-      <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardContent className="p-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-            <div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Reconciliation Health</h3>
-              <p className="text-sm text-slate-500">Are today's settlements reconciling correctly?</p>
+      <div className="flex w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+          <div>
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">Reconciliation Health</h3>
+            <p className="text-[12px] font-medium text-slate-500 mt-1">Are today's settlements reconciling correctly?</p>
+          </div>
+          <div className="flex gap-6">
+            <div className="text-right">
+              <div className="text-sm text-emerald-600 font-medium">Matched</div>
+              <div className="text-xl font-bold">98.6%</div>
             </div>
-            <div className="flex gap-6">
-              <div className="text-right">
-                <div className="text-sm text-emerald-600 font-medium">Matched</div>
-                <div className="text-xl font-bold">98.6%</div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm text-amber-500 font-medium">Pending Review</div>
-                <div className="text-xl font-bold">0.3%</div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm text-red-500 font-medium">Mismatch</div>
-                <div className="text-xl font-bold">1.1%</div>
-              </div>
+            <div className="text-right">
+              <div className="text-sm text-amber-500 font-medium">Pending Review</div>
+              <div className="text-xl font-bold">0.3%</div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-red-500 font-medium">Mismatch</div>
+              <div className="text-xl font-bold">1.1%</div>
             </div>
           </div>
-          <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex">
-            <div className="h-full bg-emerald-500" style={{ width: '98.6%' }}></div>
-            <div className="h-full bg-amber-500" style={{ width: '0.3%' }}></div>
-            <div className="h-full bg-red-500" style={{ width: '1.1%' }}></div>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+        <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex">
+          <div className="h-full bg-emerald-500" style={{ width: '98.6%' }}></div>
+          <div className="h-full bg-amber-500" style={{ width: '0.3%' }}></div>
+          <div className="h-full bg-red-500" style={{ width: '1.1%' }}></div>
+        </div>
+      </div>
 
       {/* Recent Settlement Activity */}
       <Card className="shadow-sm border-slate-200 dark:border-slate-800">
