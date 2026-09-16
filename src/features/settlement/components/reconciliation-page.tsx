@@ -347,8 +347,10 @@ export function ReconciliationDashboardPage() {
               </ComposedChart>
             </ResponsiveContainer>
           </div>
-          {/* Match Distribution */}
-          <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+        </div>
+        
+        {/* Match Distribution */}
+        <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
             <div className="mb-2">
               <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">
                 Match Distribution
