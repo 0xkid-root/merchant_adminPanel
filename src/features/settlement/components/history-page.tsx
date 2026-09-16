@@ -76,16 +76,19 @@ const columns: ColumnDef<SettlementRecord>[] = [
 
 export function SettlementHistoryPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [providerFilter, setProviderFilter] = useState('all');
+  const [dateRange, setDateRange] = useState('last30');
   
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 15 });
   const [sorting, setSorting] = useState<any[]>([]);
 
   const { data: queryData, isLoading } = useQuery({
-    queryKey: ['settlements-history', pagination.pageIndex, pagination.pageSize],
+    queryKey: ['settlements-history', pagination.pageIndex, pagination.pageSize, statusFilter, providerFilter],
     queryFn: () => getSettlements({ 
       page: pagination.pageIndex + 1, 
       limit: pagination.pageSize,
-      status: 'All'
+      status: statusFilter === 'all' ? 'All' : statusFilter
     })
   });
 
@@ -109,59 +112,57 @@ export function SettlementHistoryPage() {
       </div>
 
       <Card className="shadow-sm border-slate-200 dark:border-slate-800">
-        <CardHeader className="pb-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            <div className="relative md:col-span-2 lg:col-span-2">
+        <CardHeader className="pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex flex-col md:flex-row flex-wrap gap-4 items-center justify-between">
+            <div className="relative w-full md:w-[350px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <Input 
                 placeholder="Search Settlement ID, Merchant, UTR..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 w-full bg-slate-50 dark:bg-slate-900/50" 
+                className="pl-9 w-full bg-slate-50 dark:bg-slate-900/50 border-slate-200" 
               />
             </div>
             
-            <Select defaultValue="all">
-              <SelectTrigger className="bg-slate-50 dark:bg-slate-900/50">
-                <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Status" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="failed">Failed</SelectItem>
-              </SelectContent>
-            </Select>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="Completed">Completed</SelectItem>
+                  <SelectItem value="Processing">Processing</SelectItem>
+                  <SelectItem value="Failed">Failed</SelectItem>
+                  <SelectItem value="Under Review">Under Review</SelectItem>
+                </SelectContent>
+              </Select>
 
-            <Select defaultValue="all">
-              <SelectTrigger className="bg-slate-50 dark:bg-slate-900/50">
-                <div className="flex items-center gap-2">
+              <Select value={providerFilter} onValueChange={setProviderFilter}>
+                <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Provider" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Providers</SelectItem>
-                <SelectItem value="razorpay">Razorpay</SelectItem>
-                <SelectItem value="cashfree">Cashfree</SelectItem>
-                <SelectItem value="icici">ICICI Bank</SelectItem>
-              </SelectContent>
-            </Select>
-            
-            <Select defaultValue="last30">
-              <SelectTrigger className="bg-slate-50 dark:bg-slate-900/50 lg:col-span-2">
-                <div className="flex items-center gap-2">
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Providers</SelectItem>
+                  <SelectItem value="razorpay">Razorpay</SelectItem>
+                  <SelectItem value="cashfree">Cashfree</SelectItem>
+                  <SelectItem value="icici">ICICI Bank</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Select value={dateRange} onValueChange={setDateRange}>
+                <SelectTrigger className="w-[160px] bg-slate-50 dark:bg-slate-900/50 border-slate-200">
                   <SelectValue placeholder="Date Range" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="today">Today</SelectItem>
-                <SelectItem value="yesterday">Yesterday</SelectItem>
-                <SelectItem value="last7">Last 7 Days</SelectItem>
-                <SelectItem value="last30">Last 30 Days</SelectItem>
-                <SelectItem value="custom">Custom Range...</SelectItem>
-              </SelectContent>
-            </Select>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="today">Today</SelectItem>
+                  <SelectItem value="yesterday">Yesterday</SelectItem>
+                  <SelectItem value="last7">Last 7 Days</SelectItem>
+                  <SelectItem value="last30">Last 30 Days</SelectItem>
+                  <SelectItem value="custom">Custom Range...</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </CardHeader>
         <CardContent>
