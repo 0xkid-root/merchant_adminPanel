@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Search, MoreHorizontal } from "lucide-react";
+import { Plus, Search, MoreHorizontal, Eye, Ban, CheckCircle, Trash2 } from "lucide-react";
 import { useFees } from "../../hooks/useFees";
 import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 export function PercentageFeesPage() {
@@ -130,14 +131,30 @@ export function PercentageFeesPage() {
                           <MoreHorizontal className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="w-40">
                         <DropdownMenuItem asChild>
-                          <Link href={`/fees-pricing/percentage/${item.id}`}>View / Edit</Link>
+                          <Link href={`/fees-pricing/percentage/${item.id}`} className="cursor-pointer">
+                            <Eye className="mr-2 h-4 w-4 text-slate-500" />
+                            View / Edit
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          {item.status === "ACTIVE" ? "Deactivate" : "Activate"}
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="cursor-pointer">
+                          {item.status === "ACTIVE" ? (
+                            <>
+                              <Ban className="mr-2 h-4 w-4 text-slate-500" />
+                              Deactivate
+                            </>
+                          ) : (
+                            <>
+                              <CheckCircle className="mr-2 h-4 w-4 text-slate-500" />
+                              Activate
+                            </>
+                          )}
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-red-600 dark:text-red-400">
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600 dark:focus:bg-red-900/10 dark:focus:text-red-500">
+                          <Trash2 className="mr-2 h-4 w-4" />
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
