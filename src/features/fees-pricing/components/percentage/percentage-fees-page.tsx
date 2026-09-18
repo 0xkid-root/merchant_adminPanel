@@ -132,8 +132,8 @@ export function PercentageFeesPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-40">
-                        <DropdownMenuItem asChild>
-                          <Link href={`/fees-pricing/percentage/${item.id}`} className="cursor-pointer">
+                        <DropdownMenuItem>
+                          <Link href={`/fees-pricing/percentage/${item.id}`} className="flex items-center w-full cursor-pointer">
                             <Eye className="mr-2 h-4 w-4 text-slate-500" />
                             View / Edit
                           </Link>
