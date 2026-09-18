@@ -47,9 +47,9 @@ export function PercentageFeeDetail() {
         }
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-3">
+          <div className="lg:col-span-2 p-6 lg:border-r lg:border-slate-200 lg:dark:border-slate-800">
             <h3 className="mb-6 text-lg font-semibold text-slate-900 dark:text-white">Configuration Details</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -112,16 +112,16 @@ export function PercentageFeeDetail() {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-6">
-            <FeeCalculationPreview
-              feeType="PERCENTAGE"
-              percentage={fee.percentage}
-              minFee={fee.minFee}
-              maxFee={fee.maxFee}
-            />
+          <div className="lg:col-span-1 bg-slate-50/50 dark:bg-slate-900/20 p-6">
+            <div className="sticky top-6">
+              <FeeCalculationPreview
+                feeType="PERCENTAGE"
+                percentage={fee.percentage}
+                minFee={fee.minFee}
+                maxFee={fee.maxFee}
+              />
+            </div>
           </div>
         </div>
       </div>

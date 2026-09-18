@@ -100,11 +100,11 @@ export function CreatePercentageFee() {
         description="Configure a percentage-based pricing rule for a merchant."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">Fee Details</h3>
+      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-3">
+          <div className="lg:col-span-2 p-6 lg:border-r lg:border-slate-200 lg:dark:border-slate-800">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Fee Details</h3>
               
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -195,27 +195,27 @@ export function CreatePercentageFee() {
                   </Select>
                 </div>
               </div>
-            </div>
 
-            <div className="flex justify-end gap-3">
-              <Button type="button" variant="outline" onClick={() => router.push("/fees-pricing/percentage")}>
-                Cancel
-              </Button>
-              <Button type="submit" disabled={isSubmitting} className="bg-primary text-white shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
-                {isSubmitting ? "Creating..." : "Create Fee"}
-              </Button>
-            </div>
-          </form>
-        </div>
+              <div className="flex justify-end gap-3 pt-6 border-t border-slate-200 dark:border-slate-800">
+                <Button type="button" variant="outline" onClick={() => router.push("/fees-pricing/percentage")}>
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={isSubmitting} className="bg-primary text-white shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
+                  {isSubmitting ? "Creating..." : "Create Fee"}
+                </Button>
+              </div>
+            </form>
+          </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-6">
-            <FeeCalculationPreview
-              feeType="PERCENTAGE"
-              percentage={watchPercentage || 0}
-              minFee={watchMinFee}
-              maxFee={watchMaxFee}
-            />
+          <div className="lg:col-span-1 bg-slate-50/50 dark:bg-slate-900/20 p-6">
+            <div className="sticky top-6">
+              <FeeCalculationPreview
+                feeType="PERCENTAGE"
+                percentage={watchPercentage || 0}
+                minFee={watchMinFee}
+                maxFee={watchMaxFee}
+              />
+            </div>
           </div>
         </div>
       </div>
