@@ -89,90 +89,88 @@ export function CreateFlatFee() {
       />
 
       <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          <div className="lg:col-span-2 p-6 lg:border-r lg:border-slate-200 lg:dark:border-slate-800">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Fee Details</h3>
-              
-              <div className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="p-6 md:p-8 space-y-6">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Fee Configuration</h3>
+            
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <Label>Merchant <span className="text-red-500">*</span></Label>
+                <Select onValueChange={(val) => setValue("merchantId", val as string)}>
+                  <SelectTrigger className={`w-full ${errors.merchantId ? "border-red-500" : ""}`}>
+                    <SelectValue placeholder="Select Merchant" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {MOCK_MERCHANTS.map((m) => (
+                      <SelectItem key={m.id} value={m.id.toString()}>{m.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.merchantId && <p className="text-sm text-red-500">{errors.merchantId.message}</p>}
+              </div>
+
+              <div className="space-y-2">
+                <Label>Flat Fee <span className="text-red-500">*</span></Label>
+                <div className="relative w-full md:w-1/2">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">₹</span>
+                  <Input
+                    type="number"
+                    step="0.01"
+                    {...register("flatFee")}
+                    className={`pl-7 ${errors.flatFee ? "border-red-500" : ""}`}
+                    placeholder="e.g. 7.00"
+                  />
+                </div>
+                {errors.flatFee && <p className="text-sm text-red-500">{errors.flatFee.message}</p>}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label>Merchant <span className="text-red-500">*</span></Label>
-                  <Select onValueChange={(val) => setValue("merchantId", val as string)}>
-                    <SelectTrigger className={errors.merchantId ? "border-red-500" : ""}>
-                      <SelectValue placeholder="Select Merchant" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {MOCK_MERCHANTS.map((m) => (
-                        <SelectItem key={m.id} value={m.id.toString()}>{m.name}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors.merchantId && <p className="text-sm text-red-500">{errors.merchantId.message}</p>}
+                  <Label>Effective From <span className="text-red-500">*</span></Label>
+                  <Input type="date" {...register("effectiveFrom")} className={errors.effectiveFrom ? "border-red-500" : ""} />
+                  {errors.effectiveFrom && <p className="text-sm text-red-500">{errors.effectiveFrom.message}</p>}
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Flat Fee <span className="text-red-500">*</span></Label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">₹</span>
-                    <Input
-                      type="number"
-                      step="0.01"
-                      {...register("flatFee")}
-                      className={`pl-7 ${errors.flatFee ? "border-red-500" : ""}`}
-                      placeholder="e.g. 7.00"
-                    />
-                  </div>
-                  {errors.flatFee && <p className="text-sm text-red-500">{errors.flatFee.message}</p>}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label>Effective From <span className="text-red-500">*</span></Label>
-                    <Input type="date" {...register("effectiveFrom")} className={errors.effectiveFrom ? "border-red-500" : ""} />
-                    {errors.effectiveFrom && <p className="text-sm text-red-500">{errors.effectiveFrom.message}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Effective To</Label>
-                    <Input type="date" {...register("effectiveTo")} className={errors.effectiveTo ? "border-red-500" : ""} />
-                    {errors.effectiveTo && <p className="text-sm text-red-500">{errors.effectiveTo.message}</p>}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Status</Label>
-                  <Select defaultValue="ACTIVE" onValueChange={(val) => setValue("status", val as "ACTIVE" | "INACTIVE")}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="ACTIVE">Active</SelectItem>
-                      <SelectItem value="INACTIVE">Inactive</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label>Effective To</Label>
+                  <Input type="date" {...register("effectiveTo")} className={errors.effectiveTo ? "border-red-500" : ""} />
+                  {errors.effectiveTo && <p className="text-sm text-red-500">{errors.effectiveTo.message}</p>}
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <Button type="button" variant="outline" onClick={() => router.push("/fees-pricing/flat")}>
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={isSubmitting} className="bg-primary text-white shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
-                  {isSubmitting ? "Creating..." : "Create Fee"}
-                </Button>
+              <div className="space-y-2">
+                <Label>Status</Label>
+                <Select defaultValue="ACTIVE" onValueChange={(val) => setValue("status", val as "ACTIVE" | "INACTIVE")}>
+                  <SelectTrigger className="w-full md:w-1/2">
+                    <SelectValue placeholder="Select Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="ACTIVE">Active</SelectItem>
+                    <SelectItem value="INACTIVE">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-            </form>
-          </div>
-
-          <div className="lg:col-span-1 bg-slate-50/50 dark:bg-slate-900/20 p-6">
-            <div className="sticky top-6">
-              <FeeCalculationPreview
-                feeType="FLAT"
-                flatFee={watchFlatFee || 0}
-              />
             </div>
           </div>
-        </div>
+
+          <div className="border-t border-slate-200 dark:border-slate-800" />
+          
+          <div className="p-6 md:p-8 bg-slate-50/50 dark:bg-slate-900/20">
+            <FeeCalculationPreview
+              feeType="FLAT"
+              flatFee={watchFlatFee || 0}
+            />
+          </div>
+
+          <div className="border-t border-slate-200 dark:border-slate-800 p-6 md:px-8 flex justify-end gap-3 bg-white dark:bg-slate-900">
+            <Button type="button" variant="outline" onClick={() => router.push("/fees-pricing/flat")}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={isSubmitting} className="bg-primary text-white shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
+              {isSubmitting ? "Creating..." : "Create Fee"}
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );
