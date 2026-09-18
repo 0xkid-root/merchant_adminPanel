@@ -108,7 +108,10 @@ export function CreatePercentageFee() {
             <div className="space-y-6">
               <div className="space-y-2">
                 <Label>Merchant <span className="text-red-500">*</span></Label>
-                <Select onValueChange={(val) => setValue("merchantId", val as string)}>
+                <Select 
+                  value={watch("merchantId") || undefined}
+                  onValueChange={(val) => setValue("merchantId", val as string)}
+                >
                   <SelectTrigger className={`w-full ${errors.merchantId ? "border-red-500" : ""}`}>
                     <SelectValue placeholder="Select Merchant" />
                   </SelectTrigger>
