@@ -57,7 +57,7 @@ export function FeeCalculationPreview({
   }, [customAmount]);
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
+    <div className="flex flex-col h-full">
       <h3 className="mb-4 text-sm font-semibold text-slate-900 dark:text-white">Fee Calculation Preview</h3>
       
       <div className="mb-6 space-y-2">
