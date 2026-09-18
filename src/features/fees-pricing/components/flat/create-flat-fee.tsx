@@ -101,7 +101,11 @@ export function CreateFlatFee() {
                   onValueChange={(val) => setValue("merchantId", val as string)}
                 >
                   <SelectTrigger className={`w-full ${errors.merchantId ? "border-red-500" : ""}`}>
-                    <SelectValue placeholder="Select Merchant" />
+                    <SelectValue placeholder="Select Merchant">
+                      {watch("merchantId") 
+                        ? MOCK_MERCHANTS.find(m => m.id.toString() === watch("merchantId"))?.name 
+                        : "Select Merchant"}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {MOCK_MERCHANTS.map((m) => (
