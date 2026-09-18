@@ -93,8 +93,13 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
       },
       {
         title: "Fees & Pricing",
-        href: "/fees",
         icon: BadgeDollarSign,
+        children: [
+          { title: "Percentage Fees", href: "/fees-pricing/percentage" },
+          { title: "Flat Fees", href: "/fees-pricing/flat" },
+          { title: "Slab Based Fees", href: "/fees-pricing/slab" },
+          { title: "Pricing History", href: "/fees-pricing/history" },
+        ],
       },
     ],
   },

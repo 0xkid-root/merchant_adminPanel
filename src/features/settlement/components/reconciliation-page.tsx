@@ -244,7 +244,6 @@ export function ReconciliationDashboardPage() {
                   strokeDasharray="3 3"
                   vertical={false}
                   stroke="#e2e8f0"
-                  dark:stroke="#1e293b"
                 />
                 <XAxis
                   dataKey="date"
@@ -348,103 +347,104 @@ export function ReconciliationDashboardPage() {
               </ComposedChart>
             </ResponsiveContainer>
           </div>
-          {/* Match Distribution */}
-          <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
-            <div className="mb-2">
-              <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">
-                Match Distribution
-              </h3>
-              <p className="text-[12px] font-medium text-slate-500 mt-1">
-                Current status breakdown
-              </p>
-            </div>
-            <div className="relative flex-1 flex flex-col items-center justify-center">
-              <div className="h-[220px] w-full relative">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={[
-                        { name: "Matched", value: 98.6, color: "#10b981" },
-                        { name: "Mismatch", value: 1.1, color: "#ef4444" },
-                        {
-                          name: "Pending Review",
-                          value: 0.3,
-                          color: "#f59e0b",
-                        },
-                      ]}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={65}
-                      outerRadius={85}
-                      paddingAngle={2}
-                      dataKey="value"
-                      stroke="none"
-                    >
-                      {[
-                        { name: "Matched", value: 98.6, color: "#10b981" },
-                        { name: "Mismatch", value: 1.1, color: "#ef4444" },
-                        {
-                          name: "Pending Review",
-                          value: 0.3,
-                          color: "#f59e0b",
-                        },
-                      ].map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <RechartsTooltip
-                      content={({ active, payload }) => {
-                        if (active && payload && payload.length) {
-                          return (
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded shadow-lg text-sm">
-                              <span className="font-medium text-slate-900 dark:text-white">
-                                {payload[0].name}:{" "}
-                              </span>
-                              <span className="text-slate-600 dark:text-slate-400">
-                                {payload[0].value}%
-                              </span>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-2xl font-bold text-slate-900 dark:text-white">
-                    98.6%
-                  </span>
-                  <span className="text-[11px] font-medium text-slate-500">
-                    Matched
-                  </span>
-                </div>
-              </div>
+        </div>
 
-              <div className="w-full mt-2 space-y-2">
-                {[
-                  { name: "Matched", value: 98.6, color: "bg-emerald-500" },
-                  { name: "Mismatch", value: 1.1, color: "bg-red-500" },
-                  { name: "Pending Review", value: 0.3, color: "bg-amber-500" },
-                ].map((item) => (
-                  <div
-                    key={item.name}
-                    className="flex items-center justify-between text-[13px]"
+        {/* Match Distribution */}
+        <div className="flex h-full min-h-[350px] w-full flex-col rounded-xl border border-slate-200/60 bg-white p-6 shadow-[0_1px_2px_0_rgba(0,0,0,0.01)] dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-2">
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white">
+              Match Distribution
+            </h3>
+            <p className="text-[12px] font-medium text-slate-500 mt-1">
+              Current status breakdown
+            </p>
+          </div>
+          <div className="relative flex-1 flex flex-col items-center justify-center">
+            <div className="h-[220px] w-full relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={[
+                      { name: "Matched", value: 98.6, color: "#10b981" },
+                      { name: "Mismatch", value: 1.1, color: "#ef4444" },
+                      {
+                        name: "Pending Review",
+                        value: 0.3,
+                        color: "#f59e0b",
+                      },
+                    ]}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={65}
+                    outerRadius={85}
+                    paddingAngle={2}
+                    dataKey="value"
+                    stroke="none"
                   >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`w-2.5 h-2.5 rounded-full ${item.color}`}
-                      ></span>
-                      <span className="text-slate-600 dark:text-slate-400 font-medium">
-                        {item.name}
-                      </span>
-                    </div>
-                    <span className="font-semibold text-slate-900 dark:text-white">
-                      {item.value}%
+                    {[
+                      { name: "Matched", value: 98.6, color: "#10b981" },
+                      { name: "Mismatch", value: 1.1, color: "#ef4444" },
+                      {
+                        name: "Pending Review",
+                        value: 0.3,
+                        color: "#f59e0b",
+                      },
+                    ].map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <RechartsTooltip
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        return (
+                          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded shadow-lg text-sm">
+                            <span className="font-medium text-slate-900 dark:text-white">
+                              {payload[0].name}:{" "}
+                            </span>
+                            <span className="text-slate-600 dark:text-slate-400">
+                              {payload[0].value}%
+                            </span>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                  98.6%
+                </span>
+                <span className="text-[11px] font-medium text-slate-500">
+                  Matched
+                </span>
+              </div>
+            </div>
+
+            <div className="w-full mt-2 space-y-2">
+              {[
+                { name: "Matched", value: 98.6, color: "bg-emerald-500" },
+                { name: "Mismatch", value: 1.1, color: "bg-red-500" },
+                { name: "Pending Review", value: 0.3, color: "bg-amber-500" },
+              ].map((item) => (
+                <div
+                  key={item.name}
+                  className="flex items-center justify-between text-[13px]"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-2.5 h-2.5 rounded-full ${item.color}`}
+                    ></span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">
+                      {item.name}
                     </span>
                   </div>
-                ))}
-              </div>
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    {item.value}%
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
