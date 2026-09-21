@@ -11,6 +11,7 @@ import { Eye, KeyRound, MoreHorizontal, Power, PowerOff, RotateCcw } from "lucid
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
