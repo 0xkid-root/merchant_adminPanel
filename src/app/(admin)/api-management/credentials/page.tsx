@@ -11,12 +11,12 @@ export default function ApiCredentialsPage() {
         title="API Credentials"
         description="Manage merchant API credentials and integration access."
         actions={
-          <Button asChild>
-            <Link href="/api-management/credentials/create">
+          <Link href="/api-management/credentials/create">
+            <Button>
               <Plus className="mr-2 h-4 w-4" />
               Create API Credential
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         }
       />
       <ApiCredentialsTable />

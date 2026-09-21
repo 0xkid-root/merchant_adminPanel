@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/ui/data-table/data-table";
-import { WebhookEvent } from "../../types/webhook.types";
-import { mockWebhookEvents } from "../../mock/webhook.mock";
+import { WebhookEvent } from "../types/webhook.types";
+import { mockWebhookEvents } from "../mock/webhook.mock";
 import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 

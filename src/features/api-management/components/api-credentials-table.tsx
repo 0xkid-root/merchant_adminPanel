@@ -5,8 +5,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/common/status-badge";
-import { ApiCredential } from "../../types/api.types";
-import { mockApiCredentials } from "../../mock/api.mock";
+import { ApiCredential } from "../types/api.types";
+import { mockApiCredentials } from "../mock/api.mock";
 import { Eye, KeyRound, MoreHorizontal, Power, PowerOff, RotateCcw } from "lucide-react";
 import {
   DropdownMenu,
@@ -104,11 +104,9 @@ export function ApiCredentialsTable() {
               View
             </Button>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
+              <DropdownMenuTrigger className="inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
