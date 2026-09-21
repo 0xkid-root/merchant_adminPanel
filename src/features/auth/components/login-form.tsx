@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/dashboard");
+  };
 
   return (
     <div className="w-full flex flex-col justify-center">
@@ -47,7 +54,7 @@ export function LoginForm() {
       </div>
 
       {/* Form */}
-      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+      <form className="space-y-6" onSubmit={handleLogin}>
         {/* Email Field */}
         <div className="space-y-2">
           <Label htmlFor="email" className="text-[13px] font-semibold text-slate-700">Email Address</Label>

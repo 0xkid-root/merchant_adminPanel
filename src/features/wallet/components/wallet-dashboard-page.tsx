@@ -178,7 +178,7 @@ export function WalletDashboardPage() {
                   />
                   <Tooltip 
                     contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                    formatter={(value: number) => [formatCurrency(value), ""]}
+                    formatter={(value: any) => [formatCurrency(value as number), ""]}
                   />
                   <Area type="monotone" dataKey="credit" name="Credits" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorCredit)" />
                   <Area type="monotone" dataKey="debit" name="Debits" stroke="#ef4444" strokeWidth={2} fillOpacity={1} fill="url(#colorDebit)" />
