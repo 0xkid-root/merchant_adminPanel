@@ -122,6 +122,24 @@ export const NAVIGATION_CONFIG: NavGroup[] = [
     label: "Platform",
     items: [
       {
+        title: "API Management",
+        icon: Code2,
+        children: [
+          { title: "API Credentials", href: "/api-management/credentials" },
+          { title: "API Logs", href: "/api-management/logs" },
+          { title: "API Usage", href: "/api-management/usage" },
+        ],
+      },
+      {
+        title: "Webhook Management",
+        icon: Webhook,
+        children: [
+          { title: "Webhook Events", href: "/webhook-management/events" },
+          { title: "Webhook Logs", href: "/webhook-management/logs" },
+          { title: "Failed Webhooks", href: "/webhook-management/failed" },
+        ],
+      },
+      {
         title: "Users & RBAC",
         icon: UserCog,
         children: [
