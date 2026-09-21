@@ -109,27 +109,29 @@ export function ApiCredentialsTable() {
                 <MoreHorizontal className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => router.push(`/api-management/credentials/${cred.id}`)}>
-                  <Eye className="mr-2 h-4 w-4" />
-                  View Details
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <RotateCcw className="mr-2 h-4 w-4" />
-                  Rotate Key
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                {isActive ? (
-                  <DropdownMenuItem className="text-red-600 dark:text-red-400">
-                    <PowerOff className="mr-2 h-4 w-4" />
-                    Deactivate
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  <DropdownMenuItem onClick={() => router.push(`/api-management/credentials/${cred.id}`)}>
+                    <Eye className="mr-2 h-4 w-4" />
+                    View Details
                   </DropdownMenuItem>
-                ) : (
-                  <DropdownMenuItem className="text-emerald-600 dark:text-emerald-400">
-                    <Power className="mr-2 h-4 w-4" />
-                    Activate
+                  <DropdownMenuItem>
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Rotate Key
                   </DropdownMenuItem>
-                )}
+                  <DropdownMenuSeparator />
+                  {isActive ? (
+                    <DropdownMenuItem className="text-red-600 dark:text-red-400">
+                      <PowerOff className="mr-2 h-4 w-4" />
+                      Deactivate
+                    </DropdownMenuItem>
+                  ) : (
+                    <DropdownMenuItem className="text-emerald-600 dark:text-emerald-400">
+                      <Power className="mr-2 h-4 w-4" />
+                      Activate
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
