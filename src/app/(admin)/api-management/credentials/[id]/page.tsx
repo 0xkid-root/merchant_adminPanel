@@ -30,47 +30,46 @@ export default async function ApiCredentialDetailPage({ params }: { params: Prom
         <StatusBadge status={credential.status} />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Configuration</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Merchant</p>
-              <p className="text-base font-semibold">{credential.merchantName}</p>
+      <Card>
+        <CardHeader>
+          <CardTitle>Credential Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-slate-900 dark:text-white">Configuration</h3>
+              <div>
+                <p className="text-sm font-medium text-slate-500">Merchant</p>
+                <p className="text-base font-semibold">{credential.merchantName}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-500">Environment</p>
+                <p className="text-base">{credential.environment}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-500">API Key</p>
+                <p className="text-base font-mono">{credential.apiKey}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-medium text-slate-500">Environment</p>
-              <p className="text-base">{credential.environment}</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-slate-500">API Key</p>
-              <p className="text-base font-mono">{credential.apiKey}</p>
-            </div>
-          </CardContent>
-        </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Credential Activity</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm font-medium text-slate-500">Created</p>
-              <p className="text-base">{format(new Date(credential.createdAt), "dd MMM yyyy, HH:mm")}</p>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-slate-900 dark:text-white">Activity</h3>
+              <div>
+                <p className="text-sm font-medium text-slate-500">Created</p>
+                <p className="text-base">{format(new Date(credential.createdAt), "dd MMM yyyy, HH:mm")}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-500">Last Rotated</p>
+                <p className="text-base">{credential.lastRotatedAt ? format(new Date(credential.lastRotatedAt), "dd MMM yyyy, HH:mm") : "-"}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-500">Last Used</p>
+                <p className="text-base">{credential.lastUsedAt ? format(new Date(credential.lastUsedAt), "dd MMM yyyy, HH:mm") : "-"}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-medium text-slate-500">Last Rotated</p>
-              <p className="text-base">{credential.lastRotatedAt ? format(new Date(credential.lastRotatedAt), "dd MMM yyyy, HH:mm") : "-"}</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-slate-500">Last Used</p>
-              <p className="text-base">{credential.lastUsedAt ? format(new Date(credential.lastUsedAt), "dd MMM yyyy, HH:mm") : "-"}</p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
